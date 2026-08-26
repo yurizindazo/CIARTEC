@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+
+:root {
+    --fundo: #F4F0E8;
+    --texto: #171717;
+    --destaque: #B85C38;
+    --verde: #29483F;
+    --cinza: #A8A39A;
+    --branco: #FFFFFF;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    background: var(--fundo);
+    color: var(--texto);
+
+    font-family: "Inter", sans-serif;
+
+    line-height: 1.6;
+}
+
+
+header {
+    width: 100%;
+
+    padding: 25px 6%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid rgba(23, 23, 23, 0.12);
+}
+
+
+header h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 1.5rem;
+
+    letter-spacing: 2px;
+}
+
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+
+nav a {
+    color: var(--texto);
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+nav a:hover {
+    color: var(--destaque);
+}
+
+
+.hero {
+    min-height: 75vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 8% 10%;
+
+    background:
+        linear-gradient(
+            rgba(23, 23, 23, 0.55),
+            rgba(23, 23, 23, 0.55)
+        ),
+        url("../imagens/home/hero.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+}
+
+
+.hero-conteudo {
+    max-width: 750px;
+}
+
+
+.subtitulo,
+.etiqueta {
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+.hero h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3rem, 7vw, 6rem);
+
+    line-height: 1;
+
+    margin: 25px 0;
+}
+
+
+.hero p {
+    max-width: 600px;
+
+    font-size: 1.1rem;
+}
+
+
+.botao {
+    display: inline-block;
+
+    margin-top: 35px;
+
+    padding: 14px 25px;
+
+    background: var(--destaque);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+
+.botao:hover {
+    transform: translateY(-3px);
+}
+
+
+.introducao {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 120px 30px;
+}
+
+
+.introducao h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 3rem;
+
+    line-height: 1.1;
+
+    margin: 20px 0 30px;
+}
+
+
+.introducao p {
+    margin-bottom: 20px;
+
+    color: #4b4b4b;
+}
+
+
+.categorias {
+    padding: 50px 6% 120px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+
+.card {
+    padding: 35px;
+
+    border: 1px solid rgba(23, 23, 23, 0.15);
+
+    min-height: 330px;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: 0.3s;
+}
+
+
+.card:hover {
+    transform: translateY(-8px);
+
+    background: var(--branco);
+}
+
+
+.card span {
+    font-size: 2rem;
+}
+
+
+.card h3 {
+    margin: 25px 0 15px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 1.6rem;
+}
+
+
+.card p {
+    color: #555;
+
+    margin-bottom: 25px;
+}
+
+
+.card a {
+    margin-top: auto;
+
+    color: var(--destaque);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    font-size: 0.8rem;
+}
+
+
+footer {
+    padding: 50px 6%;
+
+    background: var(--verde);
+
+    color: white;
+}
+
+
+footer p:first-child {
+    font-family: "Playfair Display", serif;
+
+    font-size: 1.5rem;
+
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 900px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 80vh;
+
+        padding: 10% 7%;
+    }
+
+
+    .hero h2 {
+        font-size: 3rem;
+    }
+
+
+    .categorias {
+        grid-template-columns: 1fr;
+    }
+
+
+    .introducao h2 {
+        font-size: 2.3rem;
+    }
+
+}
