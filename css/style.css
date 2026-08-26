@@ -315,3 +315,37 @@ footer p:first-child {
     }
 
 }
+.pagina-intro {
+    max-width: 1000px;
+    margin: auto;
+    padding: 120px 30px 80px;
+}
+
+.pagina-intro h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1;
+    margin: 25px 0;
+}
+
+.pagina-intro > p:last-child {
+    max-width: 650px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.conteudo {
+    padding: 80px 10%;
+    background: #FFFFFF;
+}
+
+.conteudo h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.conteudo p {
+    max-width: 700px;
+    color: #555;
+}
