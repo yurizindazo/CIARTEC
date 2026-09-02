@@ -1,0 +1,5 @@
+id,nome,origem,destino,contexto,dificuldades,fonte,lat_origem,lng_origem,lat_destino,lng_destino
+1,"Rota do Mediterrâneo Central","Norte da África","Itália","Deslocamentos em direção à Europa pelo Mar Mediterrâneo","Travessia marítima perigosa e riscos de exploração","OIM e ACNUR",33.5,10.0,37.5,13.0
+2,"Rota do Mediterrâneo Ocidental","Norte da África","Espanha","Deslocamentos em direção à Espanha pelo Mediterrâneo ocidental","Travessias marítimas e dificuldades nas fronteiras","OIM e ACNUR",35.0,-6.0,36.0,-5.5
+3,"Rota do Atlântico","África Ocidental","Ilhas Canárias","Deslocamentos marítimos em direção às Ilhas Canárias","Longas travessias marítimas e condições perigosas","OIM e ACNUR",14.7,-17.4,28.1,-15.4
+4,"Rota do Darién","América do Sul","América Central","Deslocamentos pelo corredor que atravessa a região do Darién","Floresta, rios, violência e dificuldades de acesso","OIM e ACNUR",8.0,-77.5,9.0,-79.5

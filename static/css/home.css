@@ -1,0 +1,601 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #14253d;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+    height: 78px;
+    background: #071a2f;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    color: white;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.logo-icone {
+    font-size: 40px;
+}
+
+
+.logo h1 {
+    font-size: 22px;
+}
+
+
+.logo p {
+    font-size: 12px;
+    color: #aebdd0;
+    margin-top: 3px;
+}
+
+
+/* MENU */
+
+.menu {
+    display: flex;
+    gap: 32px;
+}
+
+
+.menu a {
+    color: #dce6f2;
+    text-decoration: none;
+
+    font-size: 15px;
+
+    padding: 28px 5px;
+
+    border-bottom: 3px solid transparent;
+
+    transition: 0.2s;
+}
+
+
+.menu a:hover,
+.menu a.ativo {
+    color: white;
+    border-bottom-color: #4385ff;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.conteudo {
+    max-width: 1400px;
+    margin: auto;
+    padding: 45px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 390px;
+
+    background: linear-gradient(
+        120deg,
+        #0a2340,
+        #123d68
+    );
+
+    border-radius: 18px;
+
+    padding: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: white;
+
+    overflow: hidden;
+}
+
+
+.hero-texto {
+    max-width: 700px;
+}
+
+
+.etiqueta {
+    display: inline-block;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: #73a7ff;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 18px;
+}
+
+
+.hero h2 {
+    font-size: 45px;
+    line-height: 1.12;
+
+    margin-bottom: 20px;
+}
+
+
+.hero-texto > p {
+    color: #cbd8e8;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    max-width: 650px;
+}
+
+
+/* BOTÕES */
+
+.botoes {
+    display: flex;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+
+.botao {
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.botao.principal {
+    background: #367cf5;
+    color: white;
+}
+
+
+.botao.principal:hover {
+    background: #2868d8;
+}
+
+
+.botao.secundario {
+    border: 1px solid #7189a7;
+    color: white;
+}
+
+
+.botao.secundario:hover {
+    background: #ffffff15;
+}
+
+
+/* CARD DO HERO */
+
+.hero-card {
+    width: 280px;
+
+    padding: 35px;
+
+    background: #ffffff12;
+
+    border: 1px solid #ffffff20;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+
+.globo {
+    font-size: 75px;
+
+    margin-bottom: 15px;
+}
+
+
+.hero-card h3 {
+    font-size: 21px;
+
+    margin-bottom: 10px;
+}
+
+
+.hero-card p {
+    color: #bdccdc;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   INDICADORES
+========================= */
+
+.indicadores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-top: 25px;
+}
+
+
+.card {
+    background: white;
+
+    border: 1px solid #e1e7ef;
+
+    border-radius: 13px;
+
+    padding: 22px;
+
+    display: flex;
+
+    gap: 15px;
+
+    align-items: flex-start;
+
+    box-shadow: 0 3px 12px #14253d08;
+}
+
+
+.card-icone {
+    min-width: 48px;
+    height: 48px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+.azul {
+    background: #e7f0ff;
+}
+
+
+.roxo {
+    background: #eee8ff;
+}
+
+
+.verde {
+    background: #e5f7ed;
+}
+
+
+.laranja {
+    background: #fff0dc;
+}
+
+
+.card h3 {
+    font-size: 16px;
+
+    margin-bottom: 7px;
+}
+
+
+.card p {
+    font-size: 13px;
+
+    color: #65758b;
+
+    line-height: 1.4;
+}
+
+
+/* =========================
+   EXPLORAR
+========================= */
+
+.explorar {
+    margin-top: 55px;
+}
+
+
+.titulo-secao {
+    margin-bottom: 25px;
+}
+
+
+.titulo-secao > span {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #3478e5;
+
+    letter-spacing: 1.5px;
+}
+
+
+.titulo-secao h2 {
+    font-size: 30px;
+
+    margin: 8px 0;
+}
+
+
+.titulo-secao p {
+    color: #66768b;
+
+    max-width: 700px;
+
+    line-height: 1.5;
+}
+
+
+/* ÁREAS */
+
+.areas {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.area {
+    background: white;
+
+    border: 1px solid #e1e7ef;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+    text-decoration: none;
+
+    color: #14253d;
+
+    transition: 0.2s;
+
+    box-shadow: 0 3px 12px #14253d08;
+}
+
+
+.area:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 30px #14253d15;
+}
+
+
+.area-icone {
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+
+.area h3 {
+    font-size: 21px;
+
+    margin-bottom: 10px;
+}
+
+
+.area p {
+    color: #68798e;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+.area span {
+    color: #3478e5;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   FRASE
+========================= */
+
+.frase {
+    margin-top: 45px;
+
+    background: #0b2139;
+
+    border-radius: 15px;
+
+    padding: 35px 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    color: white;
+}
+
+
+.aspas {
+    font-size: 65px;
+
+    color: #4d8cff;
+
+    line-height: 0.5;
+}
+
+
+.frase p {
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    color: #d6e1ed;
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.rodape {
+    background: #071a2f;
+
+    color: #b8c7d8;
+
+    padding: 30px 45px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 30px;
+}
+
+
+.rodape strong {
+    color: white;
+
+    font-size: 18px;
+}
+
+
+.rodape p {
+    font-size: 12px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .cabecalho {
+        padding: 0 25px;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .indicadores {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .hero-card {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .cabecalho {
+        height: auto;
+
+        padding: 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .menu a {
+        padding: 8px;
+    }
+
+    .conteudo {
+        padding: 20px;
+    }
+
+    .hero {
+        padding: 30px;
+    }
+
+    .hero h2 {
+        font-size: 32px;
+    }
+
+    .indicadores {
+        grid-template-columns: 1fr;
+    }
+
+    .areas {
+        grid-template-columns: 1fr;
+    }
+
+    .rodape {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+}

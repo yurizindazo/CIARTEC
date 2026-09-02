@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CIARTEC - Migração, Refugiados e Direitos</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <header class="cabecalho">
+
+        <div class="logo">
+
+            <div class="logo-icone">
+                🌎
+            </div>
+
+            <div>
+                <h1>CIARTEC</h1>
+
+                <p>
+                    Migração, Refugiados e Direitos
+                </p>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="{{ url_for('inicio') }}" class="ativo">
+                Início
+            </a>
+
+            <a href="{{ url_for('migracao') }}">
+                Migração
+            </a>
+
+            <a href="{{ url_for('refugiados') }}">
+                Refugiados
+            </a>
+
+            <a href="{{ url_for('direitos') }}">
+                Direitos
+            </a>
+
+            <a href="{{ url_for('protestos') }}">
+                Protestos
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <main class="conteudo">
+
+
+        <!-- INTRODUÇÃO -->
+
+        <section class="hero">
+
+            <div class="hero-texto">
+
+                <span class="etiqueta">
+                    CIARTEC • MIGRAÇÕES
+                </span>
+
+                <h2>
+                    Migração, Refúgio
+                    <br>
+                    e Direitos Humanos
+                </h2>
+
+                <p>
+                    Explore dados, rotas migratórias, fronteiras
+                    e informações sobre os desafios enfrentados
+                    por migrantes e refugiados ao redor do mundo.
+                </p>
+
+                <div class="botoes">
+
+                    <a href="{{ url_for('migracao') }}"
+                       class="botao principal">
+                        Explorar migrações
+                    </a>
+
+                    <a href="{{ url_for('refugiados') }}"
+                       class="botao secundario">
+                        Conhecer os dados
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="globo">
+                    🌎
+                </div>
+
+                <h3>
+                    Migração em foco
+                </h3>
+
+                <p>
+                    Informação para compreender os
+                    movimentos migratórios e suas realidades.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- INDICADORES -->
+
+        <section class="indicadores">
+
+            <div class="card">
+
+                <div class="card-icone azul">
+                    🧭
+                </div>
+
+                <div>
+                    <h3>Rotas migratórias</h3>
+
+                    <p>
+                        Explore diferentes trajetos
+                        de migração pelo mundo.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icone roxo">
+                    👥
+                </div>
+
+                <div>
+                    <h3>Refugiados</h3>
+
+                    <p>
+                        Conheça dados e histórias
+                        sobre pessoas refugiadas.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icone verde">
+                    🛡️
+                </div>
+
+                <div>
+                    <h3>Direitos humanos</h3>
+
+                    <p>
+                        Informações sobre direitos,
+                        proteção e acolhimento.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icone laranja">
+                    🚧
+                </div>
+
+                <div>
+                    <h3>Fronteiras</h3>
+
+                    <p>
+                        Entenda como fronteiras e
+                        barreiras afetam as migrações.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEÇÃO EXPLORAR -->
+
+        <section class="explorar">
+
+            <div class="titulo-secao">
+
+                <span>
+                    EXPLORE
+                </span>
+
+                <h2>
+                    Entenda a migração através dos dados
+                </h2>
+
+                <p>
+                    O CIARTEC reúne informações para facilitar
+                    a compreensão dos movimentos migratórios,
+                    suas causas e seus impactos.
+                </p>
+
+            </div>
+
+
+            <div class="areas">
+
+
+                <a href="{{ url_for('migracao') }}"
+                   class="area">
+
+                    <div class="area-icone">
+                        🗺️
+                    </div>
+
+                    <h3>
+                        Migrações
+                    </h3>
+
+                    <p>
+                        Conheça os principais movimentos
+                        migratórios e suas características.
+                    </p>
+
+                    <span>
+                        Explorar →
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('refugiados') }}"
+                   class="area">
+
+                    <div class="area-icone">
+                        🧳
+                    </div>
+
+                    <h3>
+                        Refugiados
+                    </h3>
+
+                    <p>
+                        Descubra dados, contextos e
+                        desafios enfrentados por refugiados.
+                    </p>
+
+                    <span>
+                        Explorar →
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('direitos') }}"
+                   class="area">
+
+                    <div class="area-icone">
+                        ⚖️
+                    </div>
+
+                    <h3>
+                        Direitos
+                    </h3>
+
+                    <p>
+                        Conheça os direitos e mecanismos
+                        de proteção das pessoas migrantes.
+                    </p>
+
+                    <span>
+                        Explorar →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- FRASE -->
+
+        <section class="frase">
+
+            <div class="aspas">
+                “
+            </div>
+
+            <p>
+                Migrar é uma realidade humana.
+                Compreender a migração é compreender
+                pessoas, histórias e direitos.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer class="rodape">
+
+        <div>
+
+            <strong>
+                CIARTEC
+            </strong>
+
+            <p>
+                Migração, Refugiados e Direitos Humanos
+            </p>
+
+        </div>
+
+        <p>
+            Projeto CIARTEC • 2026
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
