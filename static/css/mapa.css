@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: Arial, sans-serif;
     background: #f4f7fb;
@@ -11,7 +12,9 @@ body {
 }
 
 
-/* CABEÇALHO */
+/* =========================
+   CABEÇALHO
+========================= */
 
 .cabecalho {
     min-height: 70px;
@@ -24,6 +27,7 @@ body {
     padding: 15px 6%;
 }
 
+
 .logo {
     color: white;
 
@@ -31,19 +35,23 @@ body {
     flex-direction: column;
 }
 
+
 .logo strong {
     font-size: 24px;
 }
+
 
 .logo span {
     font-size: 12px;
     opacity: 0.8;
 }
 
+
 nav {
     display: flex;
     gap: 25px;
 }
+
 
 nav a {
     color: white;
@@ -51,12 +59,15 @@ nav a {
     font-size: 15px;
 }
 
+
 nav a:hover {
     opacity: 0.7;
 }
 
 
-/* CONTEÚDO */
+/* =========================
+   CONTEÚDO
+========================= */
 
 main {
     width: 88%;
@@ -65,11 +76,14 @@ main {
 }
 
 
-/* INTRODUÇÃO */
+/* =========================
+   INTRODUÇÃO
+========================= */
 
 .introducao {
     padding: 60px 0 35px;
 }
+
 
 .introducao > span {
     color: #2878c8;
@@ -78,10 +92,12 @@ main {
     letter-spacing: 1px;
 }
 
+
 .introducao h1 {
     font-size: 42px;
     margin: 12px 0;
 }
+
 
 .introducao p {
     max-width: 750px;
@@ -93,7 +109,9 @@ main {
 }
 
 
-/* MAPA */
+/* =========================
+   CONTAINER DO MAPA
+========================= */
 
 .mapa-container {
     background: white;
@@ -105,25 +123,142 @@ main {
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
 }
 
+
 .titulo-mapa h2 {
     font-size: 25px;
     margin-bottom: 8px;
 }
+
 
 .titulo-mapa p {
     color: #697386;
     margin-bottom: 20px;
 }
 
-#mapa {
+
+/* =========================
+   MAPA + PAINEL
+========================= */
+
+.area-mapa {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 20px;
+
+    align-items: stretch;
+}
+
+
+/* Mapa */
+
+.area-mapa #mapa {
     width: 100%;
     height: 550px;
 
     border-radius: 12px;
+
+    overflow: hidden;
 }
 
 
-/* CARDS */
+/* =========================
+   PAINEL DA ROTA
+========================= */
+
+.painel-rota {
+    padding: 28px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+    height: 550px;
+
+    overflow-y: auto;
+}
+
+
+.painel-rota h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+
+    font-size: 24px;
+
+    color: #0f2747;
+}
+
+
+.painel-rota h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+
+    font-size: 17px;
+
+    color: #0f2747;
+}
+
+
+.painel-rota p {
+    line-height: 1.6;
+
+    margin-bottom: 14px;
+
+    color: #526581;
+}
+
+
+.painel-rota strong {
+    color: #0f2747;
+}
+
+
+/* =========================
+   INFORMAÇÕES DA ROTA
+========================= */
+
+.info-rota {
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border-left: 4px solid #2563eb;
+
+    background: #f8fafc;
+
+    border-radius: 8px;
+}
+
+
+.info-rota h3 {
+    margin-top: 0;
+}
+
+
+/* =========================
+   BARRA DE ROLAGEM
+========================= */
+
+.painel-rota::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.painel-rota::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
 
 .informacoes {
     display: grid;
@@ -135,6 +270,7 @@ main {
     margin: 30px 0 60px;
 }
 
+
 .card {
     background: white;
 
@@ -145,17 +281,22 @@ main {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
 }
 
+
 .card h3 {
     margin-bottom: 12px;
 }
 
+
 .card p {
     color: #667085;
+
     line-height: 1.6;
 }
 
 
-/* RODAPÉ */
+/* =========================
+   RODAPÉ
+========================= */
 
 footer {
     background: #0b1f3a;
@@ -168,7 +309,28 @@ footer {
 }
 
 
-/* RESPONSIVO */
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 900px) {
+
+    .area-mapa {
+        grid-template-columns: 1fr;
+    }
+
+
+    .area-mapa #mapa {
+        height: 450px;
+    }
+
+
+    .painel-rota {
+        height: auto;
+    }
+
+}
+
 
 @media (max-width: 800px) {
 
@@ -180,21 +342,46 @@ footer {
         padding: 20px;
     }
 
+
     nav {
         flex-wrap: wrap;
 
         justify-content: center;
     }
 
+
     .introducao h1 {
         font-size: 32px;
     }
+
 
     .informacoes {
         grid-template-columns: 1fr;
     }
 
-    #mapa {
-        height: 450px;
-    }
+}
+
+/* =========================
+   MARCADORES DO MAPA
+========================= */
+
+.marcador-origem {
+    color: #16a34a;
+    font-size: 28px;
+    text-align: center;
+    line-height: 24px;
+
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+
+.marcador-destino {
+    color: #dc2626;
+    font-size: 28px;
+    text-align: center;
+    line-height: 24px;
+
+    text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.35);
 }

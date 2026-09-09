@@ -2,49 +2,95 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Migração | CIARTEC</title>
 
-    <!-- Leaflet -->
-    <link rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Leaflet CSS -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
 
     <!-- Nosso CSS -->
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/mapa.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/mapa.css') }}"
+    >
+
 </head>
+
 
 <body>
 
+
     <!-- CABEÇALHO -->
+
     <header class="cabecalho">
 
         <div class="logo">
+
             <strong>CIARTEC</strong>
-            <span>Migração, Refugiados e Direitos</span>
+
+            <span>
+                Migração, Refugiados e Direitos
+            </span>
+
         </div>
 
+
         <nav>
-            <a href="{{ url_for('inicio') }}">Início</a>
-            <a href="{{ url_for('migracao') }}">Migração</a>
-            <a href="{{ url_for('refugiados') }}">Refugiados</a>
-            <a href="{{ url_for('direitos') }}">Direitos</a>
-            <a href="{{ url_for('protestos') }}">Protestos</a>
+
+            <a href="{{ url_for('inicio') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('migracao') }}">
+                Migração
+            </a>
+
+            <a href="{{ url_for('refugiados') }}">
+                Refugiados
+            </a>
+
+            <a href="{{ url_for('direitos') }}">
+                Direitos
+            </a>
+
+            <a href="{{ url_for('protestos') }}">
+                Protestos
+            </a>
+
         </nav>
 
     </header>
 
 
     <!-- CONTEÚDO -->
+
     <main>
+
+
+        <!-- INTRODUÇÃO -->
 
         <section class="introducao">
 
-            <span>CIARTEC • MIGRAÇÃO</span>
+            <span>
+                CIARTEC • MIGRAÇÃO
+            </span>
 
-            <h1>Rotas Migratórias</h1>
+
+            <h1>
+                Rotas Migratórias
+            </h1>
+
 
             <p>
                 Explore algumas das principais rotas migratórias,
@@ -55,73 +101,118 @@
         </section>
 
 
+
         <!-- MAPA -->
+
         <section class="mapa-container">
+
+
+            <!-- TÍTULO -->
 
             <div class="titulo-mapa">
 
-                <h2>Mapa das rotas migratórias</h2>
+                <h2>
+                    Mapa das rotas migratórias
+                </h2>
+
 
                 <p>
                     Clique nos pontos e nas rotas para visualizar
                     informações.
                 </p>
 
-            
+            </div>
+
+
+
+            <!-- FILTRO -->
+
             <div class="filtro-rotas">
 
-    <label for="filtro-rota">Filtrar rota:</label>
-
-    <select id="filtro-rota">
-
-        <option value="todas">
-            Todas as rotas
-        </option>
-
-        <option value="1">
-            Rota do Mediterrâneo Central
-        </option>
-
-        <option value="2">
-            Rota do Mediterrâneo Ocidental
-        </option>
-
-        <option value="3">
-            Rota do Atlântico
-        </option>
-
-        <option value="4">
-            Rota do Darién
-        </option>
-
-    </select>
-
-        </div>
+                <label for="filtro-rota">
+                    Filtrar rota:
+                </label>
 
 
-            <div id="mapa"></div>
+                <select id="filtro-rota">
 
-            <div id="mapa"></div>
+                    <option value="todas">
+                        Todas as rotas
+                    </option>
 
-<div id="painel-rota" class="painel-rota">
 
-    <h2>Selecione uma rota</h2>
+                    <option value="1">
+                        Rota do Mediterrâneo Central
+                    </option>
 
-    <p>
-        Escolha uma rota no filtro acima para visualizar
-        mais informações.
-    </p>
 
-</div>
+                    <option value="2">
+                        Rota do Mediterrâneo Ocidental
+                    </option>
+
+
+                    <option value="3">
+                        Rota do Atlântico
+                    </option>
+
+
+                    <option value="4">
+                        Rota do Darién
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- MAPA + PAINEL -->
+
+            <div class="area-mapa">
+
+
+                <!-- MAPA -->
+
+                <div id="mapa"></div>
+
+
+                <!-- PAINEL -->
+
+                <div
+                    id="painel-rota"
+                    class="painel-rota"
+                >
+
+                    <h2>
+                        Selecione uma rota
+                    </h2>
+
+
+                    <p>
+                        Escolha uma rota no filtro acima
+                        ou clique em uma rota no mapa
+                        para visualizar mais informações.
+                    </p>
+
+                </div>
+
+            </div>
+
         </section>
 
 
+
         <!-- CARDS -->
+
         <section class="informacoes">
+
 
             <div class="card">
 
-                <h3>🌍 Rotas</h3>
+                <h3>
+                    🌍 Rotas
+                </h3>
+
 
                 <p>
                     Representação de diferentes caminhos utilizados
@@ -131,9 +222,13 @@
             </div>
 
 
+
             <div class="card">
 
-                <h3>⚠️ Dificuldades</h3>
+                <h3>
+                    ⚠️ Dificuldades
+                </h3>
+
 
                 <p>
                     As pessoas podem enfrentar conflitos, violência,
@@ -144,9 +239,13 @@
             </div>
 
 
+
             <div class="card">
 
-                <h3>📚 Fontes</h3>
+                <h3>
+                    📚 Fontes
+                </h3>
+
 
                 <p>
                     As informações do projeto serão baseadas em
@@ -155,12 +254,15 @@
 
             </div>
 
+
         </section>
 
     </main>
 
 
+
     <!-- RODAPÉ -->
+
     <footer>
 
         <p>
@@ -170,11 +272,21 @@
     </footer>
 
 
+
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
 
     <!-- Nosso JavaScript -->
-    <script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
+
+    <script
+        src="{{ url_for('static', filename='js/mapa.js') }}">
+    </script>
+
 
 </body>
 
