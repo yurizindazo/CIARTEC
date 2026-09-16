@@ -128,42 +128,12 @@
             <!-- FILTRO -->
 
             <div class="filtro-rotas">
+    <label for="filtro-rota">Filtrar rota:</label>
 
-                <label for="filtro-rota">
-                    Filtrar rota:
-                </label>
-
-
-                <select id="filtro-rota">
-
-                    <option value="todas">
-                        Todas as rotas
-                    </option>
-
-
-                    <option value="1">
-                        Rota do Mediterrâneo Central
-                    </option>
-
-
-                    <option value="2">
-                        Rota do Mediterrâneo Ocidental
-                    </option>
-
-
-                    <option value="3">
-                        Rota do Atlântico
-                    </option>
-
-
-                    <option value="4">
-                        Rota do Darién
-                    </option>
-
-                </select>
-
-            </div>
-
+    <select id="filtro-rota">
+        <option value="todas">Todas as rotas</option>
+    </select>
+</div>
 
 
             <!-- MAPA + PAINEL -->
@@ -175,6 +145,22 @@
 
                 <div id="mapa"></div>
 
+                <div class="legenda-mapa">
+    <div>
+        <span class="ponto-legenda origem"></span>
+        <span>Origem</span>
+    </div>
+
+    <div>
+        <span class="ponto-legenda destino"></span>
+        <span>Destino</span>
+    </div>
+
+    <div>
+        <span class="linha-legenda"></span>
+        <span>Rota migratória</span>
+    </div>
+</div>
 
                 <!-- PAINEL -->
 
@@ -183,16 +169,28 @@
                     class="painel-rota"
                 >
 
-                    <h2>
-                        Selecione uma rota
-                    </h2>
+                    <h2>Rotas migratórias</h2>
 
+<p>
+    Explore as principais rotas migratórias representadas
+    no mapa ao lado.
+</p>
 
-                    <p>
-                        Escolha uma rota no filtro acima
-                        ou clique em uma rota no mapa
-                        para visualizar mais informações.
-                    </p>
+<div class="info-rota">
+    <h3>Como explorar</h3>
+    <p>
+        Selecione uma rota no filtro acima ou clique
+        diretamente sobre uma rota ou marcador no mapa.
+    </p>
+</div>
+
+<div class="info-rota">
+    <h3>O que você encontrará</h3>
+    <p>
+        Cada rota apresenta informações sobre sua origem,
+        destino, contexto, dificuldades enfrentadas e fontes.
+    </p>
+</div>
 
                 </div>
 

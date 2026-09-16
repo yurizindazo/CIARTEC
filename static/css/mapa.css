@@ -186,11 +186,20 @@ main {
 
 .painel-rota h2 {
     margin-top: 0;
-    margin-bottom: 24px;
-
-    font-size: 24px;
-
+    margin-bottom: 8px;
+    font-size: 26px;
     color: #0f2747;
+    line-height: 1.2;
+}
+
+.painel-rota h2::after {
+    content: "";
+    display: block;
+    width: 45px;
+    height: 3px;
+    margin-top: 10px;
+    background: #2563eb;
+    border-radius: 5px;
 }
 
 
@@ -198,9 +207,23 @@ main {
     margin-top: 0;
     margin-bottom: 8px;
 
-    font-size: 17px;
+    font-size: 16px;
 
     color: #0f2747;
+}
+
+
+.info-rota h3 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.info-rota p {
+    margin-bottom: 0;
 }
 
 
@@ -222,21 +245,27 @@ main {
    INFORMAÇÕES DA ROTA
 ========================= */
 
-.info-rota {
-    margin-top: 18px;
+.painel-rota h2::after {
+    content: "";
+    display: block;
+    width: 45px;
+    height: 3px;
+    margin-top: 10px;
+    background: #2563eb;
+    border-radius: 5px;
+}
 
-    padding: 16px;
-
-    border-left: 4px solid #2563eb;
-
-    background: #f8fafc;
-
-    border-radius: 8px;
+.info-rota:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 
 .info-rota h3 {
     margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #0f2747;
 }
 
 
@@ -385,3 +414,142 @@ footer {
     text-shadow:
         0 1px 3px rgba(0, 0, 0, 0.35);
 }
+
+
+
+.trajeto-rota {
+    margin: 10px 0 22px;
+    padding: 18px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.local-rota {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.local-rota span {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.5px;
+}
+
+.local-rota strong {
+    font-size: 16px;
+    color: #0f2747;
+}
+
+.seta-rota {
+    margin: 8px 0;
+    font-size: 22px;
+    color: #2563eb;
+}
+
+.legenda-mapa {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 12px;
+    padding: 10px 5px;
+    color: #526581;
+    font-size: 14px;
+}
+
+.legenda-mapa div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ponto-legenda {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ponto-legenda.origem {
+    background: #22c55e;
+    border: 2px solid #15803d;
+}
+
+.ponto-legenda.destino {
+    background: #ef4444;
+    border: 2px solid #b91c1c;
+}
+
+.linha-legenda {
+    width: 28px;
+    height: 4px;
+    background: #3388ff;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.filtro-rotas {
+    margin-bottom: 20px;
+}
+
+.filtro-rotas label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #0f2747;
+}
+
+.filtro-rotas select {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: white;
+    color: #172033;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.filtro-rotas select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.rota-selecionada {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    background: #eff6ff;
+    border-radius: 10px;
+    border-left: 4px solid #2563eb;
+    color: #0f2747;
+    font-size: 14px;
+}
+
+.painel-rota {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.painel-rota:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+}
+
+.info-rota {
+    margin-top: 16px;
+    padding: 16px 18px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #2563eb;
+    border-radius: 10px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.info-rota:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);}
