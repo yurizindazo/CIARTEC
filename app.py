@@ -31,10 +31,42 @@ def protestos():
 
 @app.route("/api/rotas")
 def api_rotas():
-
     dados = pd.read_csv("dados/rotas.csv")
 
-    return jsonify(dados.to_dict(orient="records"))
+    return jsonify(
+        dados.to_dict(orient="records")
+    )
+
+
+@app.route("/api/resumo")
+def api_resumo():
+    dados = pd.read_csv("dados/rotas.csv")
+
+    total_rotas = len(dados)
+    total_origens = dados["origem"].nunique()
+    total_destinos = dados["destino"].nunique()
+
+    resumo_destinos = (
+        dados["destino"]
+        .value_counts()
+        .reset_index()
+    )
+    resumo_destinos.columns = ["destino", "quantidade"]
+
+    resumo_origens = (
+        dados["origem"]
+        .value_counts()
+        .reset_index()
+    )
+    resumo_origens.columns = ["origem", "quantidade"]
+
+    return jsonify({
+        "total_rotas": int(total_rotas),
+        "total_origens": int(total_origens),
+        "total_destinos": int(total_destinos),
+        "destinos": resumo_destinos.to_dict(orient="records"),
+        "origens": resumo_origens.to_dict(orient="records")
+    })
 
 
 if __name__ == "__main__":

@@ -454,16 +454,21 @@ painel.innerHTML = `
         <p>${rota.destino}</p>
     </div>
 
+   
     <div class="info-rota">
-        <h3>📖 Contexto</h3>
-        <p>${rota.contexto || "Não informado."}</p>
-    </div>
+    <h3>📖 Contexto</h3>
+    <p>${rota.contexto || "Não informado."}</p>
+</div>
 
-    <div class="info-rota">
-        <h3>⚠️ Dificuldades</h3>
-        <p>${rota.dificuldades || "Não informado."}</p>
-    </div>
+<div class="info-rota">
+    <h3>🔎 Causas e fatores relacionados</h3>
+    <p>${rota.causas || "Não informado."}</p>
+</div>
 
+<div class="info-rota">
+    <h3>⚠️ Dificuldades</h3>
+    <p>${rota.dificuldades || "Não informado."}</p>
+</div>
     <div class="info-rota">
         <h3>📚 Fonte</h3>
         <p>${rota.fonte || "Não informado."}</p>
@@ -475,8 +480,22 @@ painel.innerHTML = `
 function destacarRota(linhaSelecionada) {
 
     elementosRotas.forEach(elemento => {
+
+        const rota = elemento.rota;
+
+        const coresRotas = {
+            1: "#2563eb",
+            2: "#f59e0b",
+            3: "#8b5cf6",
+            4: "#10b981"
+        };
+
+        const corOriginal =
+            coresRotas[rota.id] || "#3388ff";
+
         elemento.linha.setStyle({
-            weight: 4,
+            color: corOriginal,
+            weight: 5,
             opacity: 0.35
         });
     });

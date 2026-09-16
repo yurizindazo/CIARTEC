@@ -553,3 +553,614 @@ footer {
 .info-rota:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);}
+
+    /* ==========================================
+   FILTRO DE ROTAS
+   ========================================== */
+
+.filtro-rotas {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.filtro-rotas label {
+    font-weight: bold;
+}
+
+.filtro-rotas select {
+    padding: 10px 15px;
+
+    border: 1px solid #d5dbe5;
+
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   PAINEL DA ROTA
+   ========================================== */
+
+#painel-rota {
+
+    margin-top: 20px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    min-height: 180px;
+
+}
+
+
+.painel-vazio {
+
+    text-align: center;
+
+    padding: 20px;
+
+    color: #667085;
+}
+
+
+.painel-vazio span {
+
+    font-size: 35px;
+
+}
+
+
+.painel-vazio h3 {
+
+    margin: 10px 0;
+
+    color: #172033;
+
+}
+
+
+.painel-vazio p {
+
+    margin: 0;
+
+}
+
+
+/* Cabeçalho */
+
+.cabecalho-painel {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+
+.cabecalho-painel span {
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    color: #2878c8;
+
+}
+
+
+.cabecalho-painel button {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    color: #667085;
+}
+
+
+/* Título */
+
+#painel-rota h2 {
+
+    margin-bottom: 20px;
+
+    color: #172033;
+}
+
+
+/* Detalhes */
+
+.detalhe {
+
+    margin-bottom: 18px;
+}
+
+
+.detalhe strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #2878c8;
+}
+
+
+.detalhe p {
+
+    margin: 0;
+
+    color: #596579;
+
+    line-height: 1.6;
+}
+
+/* ==========================================
+   LEGENDA DO MAPA
+   ========================================== */
+
+.legenda-mapa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 15px 5px;
+    align-items: center;
+}
+
+.legenda-mapa > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #596579;
+}
+
+.ponto-legenda {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ponto-legenda.origem {
+    background: #22c55e;
+    border: 2px solid #15803d;
+}
+
+.ponto-legenda.destino {
+    background: #ef4444;
+    border: 2px solid #b91c1c;
+}
+
+.linha-legenda {
+    width: 30px;
+    height: 5px;
+    background: #2878c8;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.linha-legenda.mediterraneo-central {
+    background: #2563eb;
+}
+
+.linha-legenda.mediterraneo-ocidental {
+    background: #f59e0b;
+}
+
+.linha-legenda.atlantico {
+    background: #8b5cf6;
+}
+
+.linha-legenda.darien {
+    background: #10b981;
+}
+
+#mapa {
+    width: 100%;
+    height: 550px;
+    min-height: 450px;
+    display: block;
+}
+
+/* =========================
+   DADOS E GRÁFICOS
+========================= */
+
+.dados-migracao {
+    max-width: 1100px;
+    margin: 70px auto;
+    padding: 0 25px;
+}
+
+.titulo-dados {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.titulo-dados > span {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.titulo-dados h2 {
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.titulo-dados p {
+    color: #64748b;
+}
+
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.indicador {
+    background: #fff;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.indicador span {
+    font-size: 28px;
+}
+
+.indicador strong {
+    display: block;
+    font-size: 32px;
+    margin: 8px 0;
+}
+
+.indicador p {
+    color: #64748b;
+}
+
+
+.grafico-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+}
+
+.grafico-titulo {
+    margin-bottom: 25px;
+}
+
+.grafico-titulo h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.grafico-titulo p {
+    color: #64748b;
+}
+
+
+#grafico-destinos {
+    max-height: 350px;
+}
+
+
+@media (max-width: 800px) {
+
+    .indicadores {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-dados h2 {
+        font-size: 28px;
+    }
+
+    .grafico-container {
+        padding: 20px;
+    }
+
+}
+
+.graficos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.grafico-container {
+    min-width: 0;
+}
+
+@media (max-width: 800px) {
+    .graficos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dados-globais {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 25px;
+}
+
+.cards-globais {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card-global {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.card-global span {
+    font-size: 32px;
+}
+
+.card-global strong {
+    display: block;
+    font-size: 30px;
+    margin: 12px 0 8px;
+}
+
+.card-global p {
+    color: #64748b;
+}
+
+.fonte-dados {
+    margin-top: 20px;
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+
+    .cards-globais {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.historico-deslocamento {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 25px;
+}
+
+.historico-deslocamento .grafico-container {
+    margin-top: 30px;
+}
+
+.historico-deslocamento #grafico-historico {
+    width: 100%;
+    max-height: 450px;
+}
+
+/* ================================
+   MELHORIA VISUAL DO MAPA
+================================ */
+
+.mapa-container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.titulo-mapa {
+    margin-bottom: 22px;
+}
+
+.titulo-mapa h2 {
+    font-size: 28px;
+    color: #172033;
+    margin-bottom: 6px;
+}
+
+.titulo-mapa p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* FILTRO */
+
+.filtro-rotas {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filtro-rotas label {
+    font-weight: 700;
+    color: #172033;
+}
+
+.filtro-rotas select {
+    min-width: 300px;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.filtro-rotas select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* MAPA */
+
+#mapa {
+    width: 100%;
+    height: 550px;
+    min-height: 450px;
+    display: block;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #dbe3ec;
+    box-shadow: inset 0 0 20px rgba(15, 23, 42, 0.06);
+}
+
+/* CONTROLES DO LEAFLET */
+
+.leaflet-control-zoom {
+    border: none !important;
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.15) !important;
+}
+
+.leaflet-control-zoom a {
+    color: #172033 !important;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: #eff6ff !important;
+    color: #2563eb !important;
+}
+
+/* LEGENDA */
+
+.legenda-mapa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.legenda-mapa > div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    font-size: 13px;
+    color: #475569;
+}
+
+/* PAINEL DA ROTA */
+
+.painel-rota {
+    margin-top: 20px;
+    padding: 25px;
+    background: #f8fafc;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.painel-rota h2 {
+    font-size: 25px;
+    color: #172033;
+    margin-bottom: 20px;
+}
+
+.info-rota {
+    background: #ffffff;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.info-rota h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: #1e3a8a;
+}
+
+.info-rota p {
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* PAINEL VAZIO */
+
+.painel-vazio {
+    text-align: center;
+    padding: 25px;
+    color: #64748b;
+}
+
+.painel-vazio span {
+    font-size: 40px;
+}
+
+.painel-vazio h3 {
+    margin: 10px 0 5px;
+    color: #172033;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 700px) {
+
+    .mapa-container {
+        padding: 18px;
+    }
+
+    .filtro-rotas {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtro-rotas select {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    #mapa {
+        height: 450px;
+    }
+
+    .legenda-mapa {
+        gap: 8px;
+    }
+
+}

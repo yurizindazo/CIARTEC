@@ -1,68 +1,289 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Protestos | Entre-Fronteiras</title>
+    <title>Protestos | CIARTEC</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
 
-    <header>
+<header class="cabecalho">
 
-        <h1>ENTRE-FRONTEIRAS</h1>
+    <div class="logo">
+        <strong>CIARTEC</strong>
+        <span>Migração, Refugiados e Direitos</span>
+    </div>
 
-        <nav>
-            <a href="../index.html">Início</a>
-            <a href="migracao.html">Migração</a>
-            <a href="refugiados.html">Refugiados</a>
-            <a href="direitos.html">Direitos Humanos</a>
-            <a href="protestos.html">Protestos</a>
-        </nav>
+    <nav>
+        <a href="{{ url_for('inicio') }}">Início</a>
+        <a href="{{ url_for('migracao') }}">Migração</a>
+        <a href="{{ url_for('refugiados') }}">Refugiados</a>
+        <a href="{{ url_for('direitos') }}">Direitos</a>
+        <a href="{{ url_for('protestos') }}">Protestos</a>
+    </nav>
 
-    </header>
+</header>
 
 
-    <main>
+<main>
 
-        <section class="pagina-intro">
+    <section class="hero-protestos">
 
-            <p class="etiqueta">04 — PROTESTOS</p>
+        <span>CIARTEC • PROTESTOS E MOVIMENTOS</span>
 
-            <h2>Quando a migração chega às ruas.</h2>
+        <h1>
+            Mobilizações por direitos e mudanças sociais
+        </h1>
+
+        <p>
+            Conheça o papel de protestos e movimentos sociais
+            relacionados à migração, aos direitos humanos e
+            à defesa de pessoas deslocadas.
+        </p>
+
+    </section>
+
+
+    <section class="protestos-intro">
+
+        <div>
+
+            <span class="tag">MOBILIZAÇÃO SOCIAL</span>
+
+            <h2>
+                Quando pessoas se organizam por direitos
+            </h2>
 
             <p>
-                Manifestações, movimentos e diferentes posições fazem parte
-                dos debates sociais e políticos sobre migração.
+                Protestos e movimentos sociais podem reunir
+                diferentes grupos em torno de reivindicações
+                relacionadas a direitos, políticas públicas,
+                condições de vida e proteção.
             </p>
-
-        </section>
-
-
-        <section class="conteudo">
-
-            <h2>Protestos pelo mundo</h2>
 
             <p>
-                Aqui ficará o mapa interativo dos protestos e acontecimentos
-                relacionados à migração.
+                Essas mobilizações podem ocorrer em diferentes
+                países e assumir formas variadas, como
+                manifestações, campanhas e atos públicos.
             </p>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <footer>
+        <div class="destaque-protesto">
 
-        <p>ENTRE-FRONTEIRAS</p>
+            <span>✊</span>
 
-    </footer>
+            <strong>
+                Participação social
+            </strong>
+
+            <p>
+                A mobilização coletiva pode dar visibilidade
+                a demandas e debates presentes na sociedade.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="cards-protestos">
+
+        <div class="card-protesto">
+
+            <span class="icone-protesto">📢</span>
+
+            <h3>
+                Reivindicações
+            </h3>
+
+            <p>
+                Movimentos podem apresentar reivindicações
+                relacionadas a direitos, proteção e políticas
+                públicas.
+            </p>
+
+        </div>
+
+
+        <div class="card-protesto">
+
+            <span class="icone-protesto">🤝</span>
+
+            <h3>
+                Organização coletiva
+            </h3>
+
+            <p>
+                Diferentes grupos podem se organizar para
+                defender interesses e chamar atenção para
+                determinadas questões sociais.
+            </p>
+
+        </div>
+
+
+        <div class="card-protesto">
+
+            <span class="icone-protesto">🌍</span>
+
+            <h3>
+                Questões globais
+            </h3>
+
+            <p>
+                Migração e direitos humanos são temas
+                presentes em debates e mobilizações em
+                diferentes partes do mundo.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="linha-tempo-protestos">
+
+        <div class="titulo-secao">
+
+            <span>COMO A MOBILIZAÇÃO ACONTECE</span>
+
+            <h2>
+                Do problema à mobilização
+            </h2>
+
+            <p>
+                Uma mobilização pode passar por diferentes
+                etapas antes e depois de uma manifestação.
+            </p>
+
+        </div>
+
+
+        <div class="etapas-protesto">
+
+            <div class="etapa-protesto">
+
+                <strong>01</strong>
+
+                <h3>
+                    Questão
+                </h3>
+
+                <p>
+                    Um problema ou reivindicação ganha
+                    atenção entre determinados grupos.
+                </p>
+
+            </div>
+
+
+            <div class="etapa-protesto">
+
+                <strong>02</strong>
+
+                <h3>
+                    Organização
+                </h3>
+
+                <p>
+                    Pessoas e organizações articulam
+                    formas de expressar suas demandas.
+                </p>
+
+            </div>
+
+
+            <div class="etapa-protesto">
+
+                <strong>03</strong>
+
+                <h3>
+                    Mobilização
+                </h3>
+
+                <p>
+                    A manifestação ou campanha leva
+                    a reivindicação ao espaço público.
+                </p>
+
+            </div>
+
+
+            <div class="etapa-protesto">
+
+                <strong>04</strong>
+
+                <h3>
+                    Debate
+                </h3>
+
+                <p>
+                    A mobilização pode ampliar o debate
+                    público sobre determinado tema.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="fontes-protestos">
+
+        <h2>
+            Fontes e informações
+        </h2>
+
+        <p>
+            Os exemplos e dados desta seção serão complementados
+            com informações de fontes institucionais e registros
+            de movimentos e organizações.
+        </p>
+
+        <div class="fontes-protestos-lista">
+
+            <div>
+                <strong>ONU</strong>
+                <span>
+                    Informações sobre direitos humanos
+                </span>
+            </div>
+
+            <div>
+                <strong>ACNUR</strong>
+                <span>
+                    Informações sobre refugiados e proteção
+                </span>
+            </div>
+
+            <div>
+                <strong>OIM</strong>
+                <span>
+                    Informações sobre migração
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Projeto CIARTEC — Migração, Refugiados e Direitos Humanos
+    </p>
+
+</footer>
 
 </body>
-
 </html>

@@ -349,3 +349,437 @@ footer p:first-child {
     max-width: 700px;
     color: #555;
 }
+
+/* =========================
+   PÁGINA DIREITOS
+========================= */
+
+.hero-direitos {
+    padding: 90px 8%;
+    background: linear-gradient(135deg, #172554, #1e3a8a);
+    color: white;
+}
+
+.hero-direitos span {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hero-direitos h1 {
+    max-width: 850px;
+    font-size: 48px;
+    line-height: 1.15;
+    margin: 15px 0;
+}
+
+.hero-direitos p {
+    max-width: 760px;
+    font-size: 18px;
+    color: #dbeafe;
+}
+
+
+.direitos-intro {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 25px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+
+    align-items: center;
+}
+
+.direitos-intro h2 {
+    font-size: 34px;
+    margin: 12px 0 20px;
+}
+
+.direitos-intro p {
+    color: #475569;
+    margin-bottom: 15px;
+}
+
+.tag {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+.destaque-direito {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.07);
+}
+
+.destaque-direito span {
+    font-size: 35px;
+}
+
+.destaque-direito strong {
+    display: block;
+    font-size: 20px;
+    margin: 15px 0 8px;
+}
+
+.destaque-direito p {
+    color: #64748b;
+}
+
+
+.cards-direitos {
+    max-width: 1100px;
+    margin: 0 auto 70px;
+    padding: 0 25px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card-direito {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+
+    border: 1px solid #e5e7eb;
+
+    transition: transform .2s, box-shadow .2s;
+}
+
+.card-direito:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.icone-direito {
+    font-size: 32px;
+}
+
+.card-direito h3 {
+    margin: 15px 0 10px;
+}
+
+.card-direito p {
+    color: #64748b;
+}
+
+
+.principios {
+    background: white;
+    padding: 70px 8%;
+}
+
+.titulo-secao {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+}
+
+.titulo-secao span {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.titulo-secao h2 {
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+.titulo-secao p {
+    color: #64748b;
+}
+
+
+.principios-grid {
+    max-width: 1100px;
+    margin: 50px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.principio {
+    border-top: 3px solid #2563eb;
+    padding-top: 20px;
+}
+
+.principio strong {
+    color: #2563eb;
+    font-size: 14px;
+}
+
+.principio h3 {
+    margin: 10px 0;
+}
+
+.principio p {
+    color: #64748b;
+}
+
+
+.fontes-direitos {
+    max-width: 1050px;
+    margin: 60px auto;
+    padding: 0 25px;
+    text-align: center;
+}
+
+.fontes-direitos h2 {
+    font-size: 30px;
+}
+
+.fontes-direitos > p {
+    color: #64748b;
+    margin: 10px 0 30px;
+}
+
+.fontes-direitos-lista {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.fontes-direitos-lista div {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+
+    min-width: 220px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.fontes-direitos-lista strong,
+.fontes-direitos-lista span {
+    display: block;
+}
+
+.fontes-direitos-lista span {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+@media (max-width: 800px) {
+
+    .hero-direitos h1 {
+        font-size: 36px;
+    }
+
+    .direitos-intro,
+    .cards-direitos,
+    .principios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fontes-direitos-lista {
+        flex-direction: column;
+    }
+
+}
+
+/* =========================
+   PÁGINA PROTESTOS
+========================= */
+
+.hero-protestos {
+    padding: 90px 8%;
+    background: linear-gradient(135deg, #172554, #1e3a8a);
+    color: white;
+}
+
+.hero-protestos span {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hero-protestos h1 {
+    max-width: 850px;
+    font-size: 48px;
+    line-height: 1.15;
+    margin: 15px 0;
+}
+
+.hero-protestos p {
+    max-width: 760px;
+    font-size: 18px;
+    color: #dbeafe;
+}
+
+
+.protestos-intro {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 25px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.protestos-intro h2 {
+    font-size: 34px;
+    margin: 12px 0 20px;
+}
+
+.protestos-intro p {
+    color: #475569;
+    margin-bottom: 15px;
+}
+
+
+.destaque-protesto {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.07);
+}
+
+.destaque-protesto span {
+    font-size: 35px;
+}
+
+.destaque-protesto strong {
+    display: block;
+    font-size: 20px;
+    margin: 15px 0 8px;
+}
+
+.destaque-protesto p {
+    color: #64748b;
+}
+
+
+.cards-protestos {
+    max-width: 1100px;
+    margin: 0 auto 70px;
+    padding: 0 25px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card-protesto {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+}
+
+.icone-protesto {
+    font-size: 32px;
+}
+
+.card-protesto h3 {
+    margin: 15px 0 10px;
+}
+
+.card-protesto p {
+    color: #64748b;
+}
+
+
+.linha-tempo-protestos {
+    background: white;
+    padding: 70px 8%;
+}
+
+
+.etapas-protesto {
+    max-width: 1100px;
+    margin: 50px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.etapa-protesto {
+    border-top: 3px solid #2563eb;
+    padding-top: 20px;
+}
+
+.etapa-protesto > strong {
+    color: #2563eb;
+    font-size: 14px;
+}
+
+.etapa-protesto h3 {
+    margin: 10px 0;
+}
+
+.etapa-protesto p {
+    color: #64748b;
+}
+
+
+.fontes-protestos {
+    max-width: 1050px;
+    margin: 60px auto;
+    padding: 0 25px;
+    text-align: center;
+}
+
+.fontes-protestos h2 {
+    font-size: 30px;
+}
+
+.fontes-protestos > p {
+    color: #64748b;
+    margin: 10px 0 30px;
+}
+
+.fontes-protestos-lista {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.fontes-protestos-lista div {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    min-width: 220px;
+    border: 1px solid #e5e7eb;
+}
+
+.fontes-protestos-lista strong,
+.fontes-protestos-lista span {
+    display: block;
+}
+
+.fontes-protestos-lista span {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+@media (max-width: 800px) {
+
+    .hero-protestos h1 {
+        font-size: 36px;
+    }
+
+    .protestos-intro,
+    .cards-protestos,
+    .etapas-protesto {
+        grid-template-columns: 1fr;
+    }
+
+    .fontes-protestos-lista {
+        flex-direction: column;
+    }
+
+}
