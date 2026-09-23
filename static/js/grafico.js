@@ -1,171 +1,167 @@
-fetch("/api/resumo")
-    .then(response => response.json())
-    .then(dados => {
+console.log("GRAFICO.JS CARREGADO");
 
-        document.getElementById("total-rotas").textContent = dados.total_rotas;
-        document.getElementById("total-origens").textContent = dados.total_origens;
-        document.getElementById("total-destinos").textContent = dados.total_destinos;
+fetch("/api/rotas")
+    .then(resposta => {
+        if (!resposta.ok) {
+            throw new Error("Erro ao acessar /api/rotas");
+        }
 
-        // =========================
-        // GRÁFICO DE DESTINOS
-        // =========================
-
-        const destinos = dados.destinos.map(item => item.destino);
-        const quantidadesDestinos = dados.destinos.map(item => item.quantidade);
-
-        new Chart(document.getElementById("grafico-destinos"), {
-            type: "bar",
-
-            data: {
-                labels: destinos,
-
-                datasets: [{
-                    label: "Quantidade de rotas",
-                    data: quantidadesDestinos
-                }]
-            },
-
-            options: {
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        }
-                    }
-                }
-            }
-        });
-
-
-        // =========================
-        // GRÁFICO DE ORIGENS
-        // =========================
-
-        const origens = dados.origens.map(item => item.origem);
-        const quantidadesOrigens = dados.origens.map(item => item.quantidade);
-
-        new Chart(document.getElementById("grafico-origens"), {
-            type: "bar",
-
-            data: {
-                labels: origens,
-
-                datasets: [{
-                    label: "Quantidade de rotas",
-                    data: quantidadesOrigens
-                }]
-            },
-
-            options: {
-                responsive: true,
-
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        }
-                    }
-                }
-            }
-        });
-
+        return resposta.json();
     })
-    .catch(error => {
-        console.error("Erro ao carregar dados dos gráficos:", error);
+    .then(rotas => {
+        console.log("ROTAS RECEBIDAS PELO GRAFICO:", rotas);
+
+        criarGraficoRotas(rotas);
+        criarGraficoDados(rotas);
+        criarListaOrigens(rotas);
+    })
+    .catch(erro => {
+        console.error("ERRO NO GRAFICO:", erro);
     });
 
 
+function criarGraficoRotas(rotas) {
 
-    // =========================
-// GRÁFICO HISTÓRICO
-// =========================
+    const canvas = document.getElementById("grafico-rotas");
 
-const anosHistorico = [
-    2006, 2007, 2008, 2009, 2010,
-    2011, 2012, 2013, 2014, 2015,
-    2016, 2017, 2018, 2019, 2020,
-    2021, 2022, 2023, 2024, 2025
-];
+    if (!canvas) {
+        console.error("Canvas grafico-rotas não encontrado.");
+        return;
+    }
 
-const deslocamentoHistorico = [
-    39.47, 42.69, 41.98, 41.10, 41.06,
-    38.54, 42.75, 51.23, 59.21, 65.03,
-    64.17, 67.90, 72.56, 78.38, 81.49,
-    88.23, 107.22, 116.36, 123.25, 117.83
-];
+    const destinos = {};
 
-new Chart(document.getElementById("grafico-historico"), {
+    rotas.forEach(rota => {
 
-    type: "line",
+        const destino = rota.destino;
 
-    data: {
-        labels: anosHistorico,
+        if (!destinos[destino]) {
+            destinos[destino] = 0;
+        }
 
-        datasets: [{
-            label: "Pessoas deslocadas (milhões)",
-            data: deslocamentoHistorico,
-            tension: 0.3,
-            fill: false,
+        destinos[destino]++;
+    });
 
-            // Aumenta visualmente as bolinhas
-            pointRadius: 5,
-            pointHoverRadius: 10,
-            pointHitRadius: 20
-        }]
-    },
+    new Chart(canvas, {
+        type: "doughnut",
 
-    options: {
-        responsive: true,
+        data: {
+            labels: Object.keys(destinos),
 
-        // Aumenta a área de detecção do mouse
-        interaction: {
-            mode: "nearest",
-            intersect: false
+            datasets: [{
+                data: Object.values(destinos)
+            }]
         },
 
-        plugins: {
-            legend: {
-                display: true
-            },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
 
-            tooltip: {
-                enabled: true
-            }
-        },
-
-        scales: {
-            y: {
-                beginAtZero: false,
-
-                title: {
-                    display: true,
-                    text: "Milhões de pessoas"
-                }
-            },
-
-            x: {
-                title: {
-                    display: true,
-                    text: "Ano"
+            plugins: {
+                legend: {
+                    position: "bottom"
                 }
             }
         }
+    });
+
+    console.log("GRAFICO DE ROTAS CRIADO");
+}
+
+
+function criarGraficoDados(rotas) {
+
+    const canvas = document.getElementById("grafico-evolucao");
+
+    if (!canvas) {
+        console.error("Canvas grafico-evolucao não encontrado.");
+        return;
     }
 
-});
+    const totalRotas = rotas.length;
+
+    const origens = new Set(
+        rotas.map(rota => rota.origem)
+    ).size;
+
+    const destinos = new Set(
+        rotas.map(rota => rota.destino)
+    ).size;
+
+    new Chart(canvas, {
+
+        type: "bar",
+
+        data: {
+
+            labels: [
+                "Rotas",
+                "Origens",
+                "Destinos"
+            ],
+
+            datasets: [{
+                label: "Quantidade",
+
+                data: [
+                    totalRotas,
+                    origens,
+                    destinos
+                ]
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    console.log("GRAFICO DE DADOS CRIADO");
+}
+
+
+function criarListaOrigens(rotas) {
+
+    const lista = document.getElementById("lista-origens");
+
+    if (!lista) {
+        console.error("Elemento lista-origens não encontrado.");
+        return;
+    }
+
+    const contagem = {};
+
+    rotas.forEach(rota => {
+
+        const origem = rota.origem;
+
+        if (!contagem[origem]) {
+            contagem[origem] = 0;
+        }
+
+        contagem[origem]++;
+    });
+
+    lista.innerHTML = "";
+
+    Object.entries(contagem).forEach(([origem, quantidade]) => {
+
+        const item = document.createElement("div");
+
+        item.innerHTML = `
+            <strong>${origem}</strong>
+            <span>${quantidade} rota(s)</span>
+        `;
+
+        lista.appendChild(item);
+    });
+
+    console.log("LISTA DE ORIGENS CRIADA");
+}

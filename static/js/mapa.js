@@ -1,418 +1,373 @@
+console.log("MAPA.JS CARREGADO");
+
 // ========================================
-// CRIANDO O MAPA
+// MAPA
 // ========================================
 
 const mapa = L.map("mapa").setView([20, 0], 2);
 
-// ========================================
-// MAPA BASE
-// ========================================
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap contributors"
-}).addTo(mapa);
-
-
-// ========================================
-// GUARDAR TODAS AS ROTAS
-// ========================================
-
-const elementosRotas = [];
-
-
-// ========================================
-// BUSCAR AS ROTAS NO FLASK
-// ========================================
-
-fetch("/api/rotas")
-
-
-    .then(resposta => resposta.json())
-
-    .then(rotas => {
-
-    console.log("ROTAS RECEBIDAS:", rotas);
-
-    const filtro = document.getElementById("filtro-rota");
-
-    rotas.forEach(rota => {
-        const opcao = document.createElement("option");
-
-        opcao.value = rota.id;
-        opcao.textContent = rota.nome;
-
-        filtro.appendChild(opcao);
-    });
-
-    rotas.forEach(rota => {
-
-
-            // ------------------------------------
-            // COORDENADAS DA ORIGEM
-            // ------------------------------------
-
-            const origem = [
-                Number(rota.lat_origem),
-                Number(rota.lng_origem)
-            ];
-
-
-            // ------------------------------------
-            // COORDENADAS DO DESTINO
-            // ------------------------------------
-
-            const destino = [
-                Number(rota.lat_destino),
-                Number(rota.lng_destino)
-            ];
-
-
-            // ========================================
-            // LINHA DA ROTA
-            // ========================================
-
-// COR DA ROTA
-const coresRotas = {
-    1: "#2563eb",
-    2: "#f59e0b",
-    3: "#8b5cf6",
-    4: "#10b981"
-};
-
-const corRota = coresRotas[rota.id] || "#3388ff";
-
-// LINHA DA ROTA
-const linha = L.polyline(
-    [origem, destino],
+L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
-        color: corRota,
-        weight: 5,
-        opacity: 0.8,
-        dashArray: "10, 8"
+        attribution: "&copy; OpenStreetMap contributors"
     }
 ).addTo(mapa);
 
 
-linha.on("mouseover", function () {
-    linha.setStyle({
-        weight: 8,
-        opacity: 1
-    });
+// ========================================
+// VARIÁVEIS
+// ========================================
 
-});
-
-
-linha.on("mouseout", function () {
-
-    linha.setStyle({
-        weight: 5,
-        opacity: 0.8
-    });
-
-});
-
-
-            // ========================================
-            // MARCADOR DA ORIGEM
-            // ========================================
-
-const marcadorOrigem = L.marker(origem, {
-    icon: L.divIcon({
-        className: "",
-html: `
-    <div style="
-        width: 20px;
-        height: 20px;
-        background: #22c55e;
-        border: 3px solid #15803d;
-        border-radius: 50%;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-    "></div>
-
-
-        `,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-    })
-})
-    .addTo(mapa)
-    .bindPopup(`
-        <h3>Origem</h3>
-        <p>${rota.origem}</p>
-    `);
-
-
-            // Clique na origem
-           marcadorOrigem.on("click", function () {
-
-    mostrarInformacoes(rota);
-                filtro.value = rota.id;
-    mapa.fitBounds(
-        linha.getBounds(),
-        {
-            padding: [50, 50]
-        }
-    );
-
-});
-
-            // ========================================
-            // MARCADOR DO DESTINO
-            // ========================================
-
-const marcadorDestino = L.marker(destino, {
-    icon: L.divIcon({
-        className: "",
-html: `
-    <div style="
-        width: 20px;
-        height: 20px;
-        background: #ef4444;
-        border: 3px solid #b91c1c;
-        border-radius: 50%;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-    "></div>
-`,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-    })
-})
-    .addTo(mapa)
-    .bindPopup(`
-        <h3>Destino</h3>
-        <p>${rota.destino}</p>
-    `);
-
-
-            // Clique no destino
-           marcadorDestino.on("click", function () {
-
-    mostrarInformacoes(rota);
-        filtro.value = rota.id;
-    mapa.fitBounds(
-        linha.getBounds(),
-        {
-            padding: [50, 50]
-        }
-    );
-
-});
-
-            // ========================================
-            // POPUP DA LINHA
-            // ========================================
-
-            linha.bindPopup(`
-
-                <h3>${rota.nome}</h3>
-
-                <p>
-                    ${rota.contexto}
-                </p>
-
-                <br>
-
-                <strong>Origem:</strong>
-                ${rota.origem}
-
-                <br>
-
-                <strong>Destino:</strong>
-                ${rota.destino}
-
-                <br><br>
-
-                <strong>Dificuldades:</strong>
-
-                <p>
-                    ${rota.dificuldades}
-                </p>
-
-                <strong>Fonte:</strong>
-                ${rota.fonte}
-
-            `);
-
-
-            // ========================================
-            // CLIQUE NA LINHA
-            // ========================================
-
-         linha.on("click", function () {
-
-    mostrarInformacoes(rota);
-    filtro.value = rota.id;
-    destacarRota(linha);
-
-
-    mapa.fitBounds(
-        linha.getBounds(),
-        {
-            padding: [50, 50]
-        }
-    );
-
-});
-
-
-            // ========================================
-            // GUARDAR ELEMENTOS DA ROTA
-            // ========================================
-
-            elementosRotas.push({
-    rota: rota,
-    linha: linha,
-    marcadorOrigem: marcadorOrigem,
-    marcadorDestino: marcadorDestino
-});
-
-const todasAsLinhas = elementosRotas.map(
-    elemento => elemento.linha
-);
-
-if (todasAsLinhas.length > 0) {
-    const grupoRotas = L.featureGroup(todasAsLinhas);
-
-    mapa.fitBounds(
-        grupoRotas.getBounds(),
-        {
-            padding: [40, 40]
-        }
-    );
-}
-
-        });
+const elementosRotas = [];
+let rotasOriginais = [];
 
 
 // ========================================
-// FILTRO DAS ROTAS
+// CORES
 // ========================================
 
-filtro.addEventListener("change", function () {
-
-    const rotaEscolhida = this.value;
-
-
-    // ------------------------------------
-    // MOSTRAR / ESCONDER ROTAS
-    // ------------------------------------
-
-    elementosRotas.forEach(elemento => {
-
-        const identificador = String(elemento.rota.id);
+const cores = {
+    1: "#315ee8",
+    2: "#f59e0b",
+    3: "#8057ed",
+    4: "#10a879"
+};
 
 
-        if (rotaEscolhida === "todas") {
+// ========================================
+// CRIAR CURVA
+// ========================================
 
-            elemento.linha.addTo(mapa);
+function criarCurva(origem, destino) {
 
-            elemento.marcadorOrigem.addTo(mapa);
+    const lat1 = origem[0];
+    const lng1 = origem[1];
 
-            elemento.marcadorDestino.addTo(mapa);
+    const lat2 = destino[0];
+    const lng2 = destino[1];
 
-        }
+    const meioLat = (lat1 + lat2) / 2;
+    const meioLng = (lng1 + lng2) / 2;
 
-        else if (identificador === rotaEscolhida) {
+    const distancia = Math.sqrt(
+        Math.pow(lat2 - lat1, 2) +
+        Math.pow(lng2 - lng1, 2)
+    );
 
-            elemento.linha.addTo(mapa);
+    const intensidade = Math.min(
+        distancia * 0.25,
+        15
+    );
 
-            elemento.marcadorOrigem.addTo(mapa);
+    const pontoControle = [
+        meioLat + intensidade,
+        meioLng
+    ];
 
-            elemento.marcadorDestino.addTo(mapa);
+    const pontos = [];
 
-        }
+    for (let i = 0; i <= 30; i++) {
 
-        else {
+        const t = i / 30;
 
-            mapa.removeLayer(elemento.linha);
+        const lat =
+            Math.pow(1 - t, 2) * lat1 +
+            2 * (1 - t) * t * pontoControle[0] +
+            Math.pow(t, 2) * lat2;
 
-            mapa.removeLayer(elemento.marcadorOrigem);
+        const lng =
+            Math.pow(1 - t, 2) * lng1 +
+            2 * (1 - t) * t * pontoControle[1] +
+            Math.pow(t, 2) * lng2;
 
-            mapa.removeLayer(elemento.marcadorDestino);
-
-        }
-
-    });
-
-
-    // ------------------------------------
-    // PAINEL
-    // ------------------------------------
-
-    if (rotaEscolhida === "todas") {
-
-        const painel = document.getElementById("painel-rota");
-
-        painel.innerHTML = `
-            <h2>Rotas migratórias</h2>
-
-            <p>
-                Selecione uma rota no filtro ou clique
-                em uma rota no mapa para visualizar
-                informações detalhadas.
-            </p>
-        `;
-
-
-        elementosRotas.forEach(elemento => {
-
-            elemento.linha.setStyle({
-                weight: 5,
-                opacity: 0.8
-            });
-
-        });
-
-
-        mapa.setView([20, 0], 2);
-
+        pontos.push([lat, lng]);
     }
 
-    else {
+    return pontos;
+}
 
-        const rotaSelecionada = elementosRotas.find(
-            elemento =>
-                String(elemento.rota.id) === rotaEscolhida
+
+// ========================================
+// IDENTIFICAR TIPO
+// ========================================
+
+function descobrirTipo(rota) {
+
+    if (
+        rota.nome.includes("Mediterrâneo") ||
+        rota.nome.includes("Atlântico")
+    ) {
+        return "migracao";
+    }
+
+    if (
+        rota.nome.includes("Darién")
+    ) {
+        return "migracao";
+    }
+
+    return "migracao";
+}
+
+
+// ========================================
+// IDENTIFICAR REGIÃO
+// ========================================
+
+function descobrirRegiao(rota) {
+
+    const texto = (
+        rota.origem +
+        " " +
+        rota.destino
+    ).toLowerCase();
+
+
+    // EUROPA
+
+    if (
+        texto.includes("itália") ||
+        texto.includes("espanha") ||
+        texto.includes("canárias") ||
+        texto.includes("europa")
+    ) {
+        return "europa";
+    }
+
+
+    // ÁFRICA
+
+    if (
+        texto.includes("áfrica")
+    ) {
+        return "africa";
+    }
+
+
+    // AMÉRICAS
+
+    if (
+        texto.includes("américa")
+    ) {
+        return "america";
+    }
+
+
+    return "outra";
+}
+
+
+// ========================================
+// CRIAR ELEMENTO
+// ========================================
+
+function criarElementoRota(rota) {
+
+    const origem = [
+        Number(rota.lat_origem),
+        Number(rota.lng_origem)
+    ];
+
+    const destino = [
+        Number(rota.lat_destino),
+        Number(rota.lng_destino)
+    ];
+
+    const cor =
+        cores[rota.id] ||
+        "#315ee8";
+
+
+    // LINHA
+
+    const linha = L.polyline(
+        criarCurva(origem, destino),
+        {
+            color: cor,
+            weight: 4,
+            opacity: 0.9,
+            dashArray: "10, 7",
+            lineCap: "round",
+            lineJoin: "round"
+        }
+    );
+
+
+    linha.bindTooltip(
+        rota.nome,
+        {
+            sticky: true,
+            direction: "top"
+        }
+    );
+
+
+    // ORIGEM
+
+    const marcadorOrigem =
+        L.circleMarker(
+            origem,
+            {
+                radius: 9,
+                color: "#15803d",
+                fillColor: "#4ade80",
+                fillOpacity: 1,
+                weight: 3
+            }
         );
 
 
-        if (rotaSelecionada) {
+    // DESTINO
 
-            mostrarInformacoes(
-                rotaSelecionada.rota
+    const marcadorDestino =
+        L.circleMarker(
+            destino,
+            {
+                radius: 9,
+                color: "#dc2626",
+                fillColor: "#f87171",
+                fillOpacity: 1,
+                weight: 3
+            }
+        );
+
+
+    // POPUP ORIGEM
+
+    marcadorOrigem.bindPopup(`
+        <div class="popup-rota">
+            <strong>${rota.nome}</strong>
+            <br><br>
+            <b>Origem:</b>
+            ${rota.origem}
+        </div>
+    `);
+
+
+    // POPUP DESTINO
+
+    marcadorDestino.bindPopup(`
+        <div class="popup-rota">
+            <strong>${rota.nome}</strong>
+            <br><br>
+            <b>Destino:</b>
+            ${rota.destino}
+        </div>
+    `);
+
+
+    // POPUP LINHA
+
+    linha.bindPopup(`
+        <div class="popup-rota">
+            <strong>${rota.nome}</strong>
+            <br>
+            ${rota.origem}
+            →
+            ${rota.destino}
+        </div>
+    `);
+
+
+    // CLIQUE NA LINHA
+
+    linha.on("click", function () {
+
+        mostrarInformacoes(rota);
+
+        destacarRota(rota.id);
+
+        mapa.fitBounds(
+            linha.getBounds(),
+            {
+                padding: [60, 60]
+            }
+        );
+    });
+
+
+    // CLIQUE ORIGEM
+
+    marcadorOrigem.on("click", function () {
+
+        mostrarInformacoes(rota);
+
+        destacarRota(rota.id);
+    });
+
+
+    // CLIQUE DESTINO
+
+    marcadorDestino.on("click", function () {
+
+        mostrarInformacoes(rota);
+
+        destacarRota(rota.id);
+    });
+
+
+    return {
+        rota: rota,
+        linha: linha,
+        marcadorOrigem: marcadorOrigem,
+        marcadorDestino: marcadorDestino
+    };
+}
+
+
+// ========================================
+// CARREGAR ROTAS
+// ========================================
+
+fetch("/api/rotas")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error(
+                "Erro ao carregar rotas"
             );
-
-
-            destacarRota(
-                rotaSelecionada.linha
-            );
-
-
-            mapa.fitBounds(
-                rotaSelecionada.linha.getBounds(),
-                {
-                    padding: [50, 50]
-                }
-            );
-
         }
 
-    }
-
-});
-
-
+        return response.json();
     })
 
+    .then(rotas => {
 
-    // ========================================
-    // ERRO
-    // ========================================
+        console.log(
+            "Rotas recebidas:",
+            rotas
+        );
+
+        rotasOriginais = rotas;
+
+
+        // CRIAR ROTAS
+
+        rotas.forEach(rota => {
+
+            elementosRotas.push(
+                criarElementoRota(rota)
+            );
+
+        });
+
+
+        // PREENCHER SELECT
+
+        preencherFiltroRotas(rotas);
+
+
+        // MOSTRAR TODAS
+
+        mostrarTodasRotas();
+
+    })
 
     .catch(erro => {
 
         console.error(
-            "Erro ao carregar as rotas:",
+            "ERRO:",
             erro
         );
 
@@ -420,88 +375,530 @@ filtro.addEventListener("change", function () {
 
 
 // ========================================
-// FUNÇÃO PARA MOSTRAR INFORMAÇÕES
+// PREENCHER FILTRO DE ROTAS
+// ========================================
+
+function preencherFiltroRotas(rotas) {
+
+    const filtro =
+        document.getElementById(
+            "filtro-rota"
+        );
+
+    if (!filtro) {
+        return;
+    }
+
+
+    filtro.innerHTML = `
+        <option value="todas">
+            Todas as rotas
+        </option>
+    `;
+
+
+    rotas.forEach(rota => {
+
+        const opcao =
+            document.createElement(
+                "option"
+            );
+
+        opcao.value = rota.id;
+
+        opcao.textContent =
+            rota.nome;
+
+        filtro.appendChild(
+            opcao
+        );
+
+    });
+}
+
+
+// ========================================
+// APLICAR FILTROS
+// ========================================
+
+function aplicarFiltros() {
+
+    const ano =
+        document.getElementById(
+            "filtro-ano"
+        )?.value || "2024";
+
+
+    const tipo =
+        document.getElementById(
+            "filtro-tipo"
+        )?.value || "todas";
+
+
+    const regiao =
+        document.getElementById(
+            "filtro-regiao"
+        )?.value || "todas";
+
+
+    const rota =
+        document.getElementById(
+            "filtro-rota"
+        )?.value || "todas";
+
+
+    console.log(
+        "Filtros:",
+        ano,
+        tipo,
+        regiao,
+        rota
+    );
+
+
+    const resultado =
+        rotasOriginais.filter(
+            item => {
+
+
+                // ANO
+
+                if (
+                    ano !== "2024"
+                ) {
+                    return false;
+                }
+
+
+                // TIPO
+
+                if (
+                    tipo !== "todas" &&
+                    descobrirTipo(item)
+                        !== tipo
+                ) {
+                    return false;
+                }
+
+
+                // REGIÃO
+
+                if (
+                    regiao !== "todas" &&
+                    descobrirRegiao(item)
+                        !== regiao
+                ) {
+                    return false;
+                }
+
+
+                // ROTA
+
+                if (
+                    rota !== "todas" &&
+                    String(item.id)
+                        !== String(rota)
+                ) {
+                    return false;
+                }
+
+
+                return true;
+            }
+        );
+
+
+    console.log(
+        "Rotas encontradas:",
+        resultado
+    );
+
+
+    atualizarMapa(
+        resultado
+    );
+}
+
+
+// ========================================
+// ATUALIZAR MAPA
+// ========================================
+
+function atualizarMapa(
+    rotas
+) {
+
+    // REMOVER TODAS
+
+    elementosRotas.forEach(
+        elemento => {
+
+            mapa.removeLayer(
+                elemento.linha
+            );
+
+            mapa.removeLayer(
+                elemento.marcadorOrigem
+            );
+
+            mapa.removeLayer(
+                elemento.marcadorDestino
+            );
+
+        }
+    );
+
+
+    // NENHUMA
+
+    if (
+        rotas.length === 0
+    ) {
+
+        mostrarPainelVazio(
+            "Nenhuma rota encontrada",
+            "Altere os filtros e tente novamente."
+        );
+
+        return;
+    }
+
+
+    // ADICIONAR FILTRADAS
+
+    const elementos =
+        elementosRotas.filter(
+            elemento =>
+                rotas.some(
+                    rota =>
+                        String(
+                            rota.id
+                        ) === String(
+                            elemento.rota.id
+                        )
+                )
+        );
+
+
+    elementos.forEach(
+        elemento => {
+
+            elemento.linha.addTo(
+                mapa
+            );
+
+            elemento.marcadorOrigem.addTo(
+                mapa
+            );
+
+            elemento.marcadorDestino.addTo(
+                mapa
+            );
+
+        }
+    );
+
+
+    // AJUSTAR MAPA
+
+    const grupo =
+        L.featureGroup(
+            elementos.map(
+                elemento =>
+                    elemento.linha
+            )
+        );
+
+
+    mapa.fitBounds(
+        grupo.getBounds(),
+        {
+            padding: [30, 30]
+        }
+    );
+
+
+    // PAINEL
+
+    if (
+        elementos.length > 1
+    ) {
+
+        mostrarPainelVazio(
+            "Selecione uma rota",
+            "Clique em uma linha ou ponto do mapa para visualizar os detalhes."
+        );
+
+    }
+}
+
+
+// ========================================
+// MOSTRAR TODAS
+// ========================================
+
+function mostrarTodasRotas() {
+
+    atualizarMapa(
+        rotasOriginais
+    );
+}
+
+
+// ========================================
+// DESTACAR
+// ========================================
+
+function destacarRota(id) {
+
+    elementosRotas.forEach(
+        elemento => {
+
+            if (
+                String(
+                    elemento.rota.id
+                ) === String(id)
+            ) {
+
+                elemento.linha.setStyle({
+                    weight: 7,
+                    opacity: 1
+                });
+
+                elemento.marcadorOrigem.setStyle({
+                    radius: 11,
+                    weight: 4
+                });
+
+                elemento.marcadorDestino.setStyle({
+                    radius: 11,
+                    weight: 4
+                });
+
+            } else {
+
+                elemento.linha.setStyle({
+                    weight: 3,
+                    opacity: 0.18
+                });
+
+                elemento.marcadorOrigem.setStyle({
+                    radius: 7,
+                    weight: 2
+                });
+
+                elemento.marcadorDestino.setStyle({
+                    radius: 7,
+                    weight: 2
+                });
+
+            }
+        }
+    );
+}
+
+
+// ========================================
+// INFORMAÇÕES DA ROTA
 // ========================================
 
 function mostrarInformacoes(rota) {
-const painel =
-    document.getElementById("painel-rota");
+
+    const painel =
+        document.getElementById(
+            "painel-rota"
+        );
 
 
-const filtro =
-    document.getElementById("filtro-rota");
+    if (!painel) {
+        return;
+    }
 
 
-// Volta o painel para o topo
-painel.scrollTop = 0;
+    painel.innerHTML = `
+
+        <div class="painel-topo">
+
+            <span class="painel-label">
+                ROTA MIGRATÓRIA
+            </span>
+
+            <h2>
+                ${rota.nome}
+            </h2>
+
+        </div>
 
 
-// Atualiza o filtro
-filtro.value = String(rota.id);
+        <div class="painel-trajeto">
+
+            <div class="ponto-trajeto">
+
+                <span>
+                    ORIGEM
+                </span>
+
+                <strong>
+                    📍 ${rota.origem}
+                </strong>
+
+            </div>
 
 
-    // Atualiza o painel
-painel.innerHTML = `
-    <h2>${rota.nome}</h2>
+            <div class="linha-trajeto">
+                →
+            </div>
 
-    <div class="info-rota">
-        <h3>📍 Origem</h3>
-        <p>${rota.origem}</p>
-    </div>
 
-    <div class="info-rota">
-        <h3>🎯 Destino</h3>
-        <p>${rota.destino}</p>
-    </div>
+            <div class="ponto-trajeto">
 
-   
-    <div class="info-rota">
-    <h3>📖 Contexto</h3>
-    <p>${rota.contexto || "Não informado."}</p>
-</div>
+                <span>
+                    DESTINO
+                </span>
 
-<div class="info-rota">
-    <h3>🔎 Causas e fatores relacionados</h3>
-    <p>${rota.causas || "Não informado."}</p>
-</div>
+                <strong>
+                    🎯 ${rota.destino}
+                </strong>
 
-<div class="info-rota">
-    <h3>⚠️ Dificuldades</h3>
-    <p>${rota.dificuldades || "Não informado."}</p>
-</div>
-    <div class="info-rota">
-        <h3>📚 Fonte</h3>
-        <p>${rota.fonte || "Não informado."}</p>
-    </div>
-`;
+            </div>
 
+        </div>
+
+
+        <div class="informacoes-grid">
+
+
+            <div class="card-info">
+
+                <div class="icone-info">
+                    📖
+                </div>
+
+                <div>
+
+                    <span>
+                        CONTEXTO
+                    </span>
+
+                    <p>
+                        ${rota.contexto}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <div class="icone-info">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <span>
+                        FATORES RELACIONADOS
+                    </span>
+
+                    <p>
+                        ${rota.causas}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <div class="icone-info">
+                    🚧
+                </div>
+
+                <div>
+
+                    <span>
+                        DIFICULDADES
+                    </span>
+
+                    <p>
+                        ${rota.dificuldades}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="card-info">
+
+                <div class="icone-info">
+                    📚
+                </div>
+
+                <div>
+
+                    <span>
+                        FONTE
+                    </span>
+
+                    <p>
+                        ${rota.fonte}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+
+    painel.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
 }
 
-function destacarRota(linhaSelecionada) {
 
-    elementosRotas.forEach(elemento => {
+// ========================================
+// PAINEL VAZIO
+// ========================================
 
-        const rota = elemento.rota;
+function mostrarPainelVazio(
+    titulo,
+    texto
+) {
 
-        const coresRotas = {
-            1: "#2563eb",
-            2: "#f59e0b",
-            3: "#8b5cf6",
-            4: "#10b981"
-        };
+    const painel =
+        document.getElementById(
+            "painel-rota"
+        );
 
-        const corOriginal =
-            coresRotas[rota.id] || "#3388ff";
 
-        elemento.linha.setStyle({
-            color: corOriginal,
-            weight: 5,
-            opacity: 0.35
-        });
-    });
+    if (!painel) {
+        return;
+    }
 
-    linhaSelecionada.setStyle({
-        weight: 9,
-        opacity: 1
-    });
+
+    painel.innerHTML = `
+
+        <div class="painel-vazio">
+
+            <span>
+                🗺️
+            </span>
+
+            <h3>
+                ${titulo}
+            </h3>
+
+            <p>
+                ${texto}
+            </p>
+
+        </div>
+
+    `;
 }

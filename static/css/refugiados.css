@@ -6,13 +6,13 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fa;
-    color: #172033;
+    background: #abffff;
+    color: #172f33;
     line-height: 1.6;
 }
 
 .cabecalho {
-    background: #ffffff;
+    background: #a4eef5;
     padding: 20px 7%;
     display: flex;
     justify-content: space-between;
@@ -46,12 +46,12 @@ nav a {
 }
 
 nav a:hover {
-    color: #2563eb;
+    color: #25deeb;
 }
 
 .hero-refugiados {
     padding: 90px 8%;
-    background: linear-gradient(135deg, #172554, #1e3a8a);
+    background: linear-gradient(135deg, #174654, #1e8a81);
     color: white;
 }
 
@@ -155,7 +155,7 @@ nav a:hover {
 }
 
 .titulo-secao span {
-    color: #2563eb;
+    color: #25d4eb;
     font-size: 13px;
     font-weight: bold;
 }
@@ -186,7 +186,7 @@ nav a:hover {
     height: 45px;
     border-radius: 50%;
     background: #dbeafe;
-    color: #1d4ed8;
+    color: #1dc2d8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -222,7 +222,7 @@ nav a:hover {
 }
 
 .fontes-lista div {
-    background: white;
+    background: rgb(151, 240, 247);
     padding: 20px 30px;
     border-radius: 12px;
     min-width: 220px;
@@ -240,7 +240,7 @@ nav a:hover {
 }
 
 footer {
-    background: #111827;
+    background: #112427;
     color: #cbd5e1;
     text-align: center;
     padding: 25px;
