@@ -4,17 +4,22 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Migração | CIARTEC</title>
 
-    <!-- Leaflet -->
+
+    <!-- Leaflet CSS -->
+
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     >
 
-    <!-- CSS -->
+
+    <!-- Nosso CSS -->
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='css/mapa.css') }}"
@@ -25,21 +30,14 @@
 
 <body>
 
-<!-- =========================================
-     CABEÇALHO
-========================================= -->
 
-<header class="topbar">
+    <!-- CABEÇALHO -->
 
-    <div class="logo-area">
+    <header class="cabecalho">
 
-        <div class="logo-icon">
-            🌐
-        </div>
+        <div class="logo">
 
-        <div>
-
-            <h1>CIARTEC</h1>
+            <strong>CIARTEC</strong>
 
             <span>
                 Migração, Refugiados e Direitos
@@ -47,688 +45,247 @@
 
         </div>
 
-    </div>
 
+        <nav>
 
-    <nav class="top-nav">
+            <a href="{{ url_for('inicio') }}">
+                Início
+            </a>
 
-        <a href="/">
-            Início
-        </a>
-
-        <a href="/migracao" class="ativo">
-            Migração
-        </a>
-
-        <a href="/refugiados">
-            Refugiados
-        </a>
-
-        <a href="/direitos">
-            Direitos
-        </a>
-
-        <a href="/protestos">
-            Protestos
-        </a>
-
-    </nav>
-
-
-    <div class="top-actions">
-
-        <div class="busca">
-
-            <input
-                type="text"
-                placeholder="Buscar no site..."
-            >
-
-            <span>⌕</span>
-
-        </div>
-
-        <button class="botao-tema">
-            ☾
-        </button>
-
-    </div>
-
-</header>
-
-
-
-<!-- =========================================
-     ESTRUTURA PRINCIPAL
-========================================= -->
-
-<div class="layout">
-
-
-    <!-- =====================================
-         MENU LATERAL
-    ====================================== -->
-
-    <aside class="sidebar">
-
-        <div class="sidebar-titulo">
-            NAVEGAÇÃO
-        </div>
-
-
-        <a href="#mapa" class="sidebar-item ativo">
-
-            <span>🗺️</span>
-
-            <strong>
-                Mapa Interativo
-            </strong>
-
-        </a>
-
-
-        <a href="#rotas" class="sidebar-item">
-
-            <span>↝</span>
-
-            Rotas de Migração
-
-        </a>
-
-
-        <a href="#fronteiras" class="sidebar-item">
-
-            <span>╫</span>
-
-            Fronteiras e Muros
-
-        </a>
-
-
-        <a href="#paises" class="sidebar-item">
-
-            <span>▥</span>
-
-            Dados por País
-
-        </a>
-
-
-        <a href="#graficos" class="sidebar-item">
-
-            <span>◔</span>
-
-            Gráficos Globais
-
-        </a>
-
-
-        <div class="sidebar-separador"></div>
-
-
-        <div class="sidebar-titulo">
-            FILTROS
-        </div>
-
-
-        <label>
-            Ano
-        </label>
-
-        <select id="filtro-ano">
-
-            <option>2024</option>
-            <option>2023</option>
-            <option>2022</option>
-
-        </select>
-
-
-        <label>
-            Tipo de dado
-        </label>
-
-        <select id="filtro-tipo">
-
-            <option value="todas">
-                Todas
-            </option>
-
-            <option value="migracao">
+            <a href="{{ url_for('migracao') }}">
                 Migração
-            </option>
+            </a>
 
-            <option value="refugiados">
+            <a href="{{ url_for('refugiados') }}">
                 Refugiados
-            </option>
+            </a>
 
-        </select>
+            <a href="{{ url_for('direitos') }}">
+                Direitos
+            </a>
 
+            <a href="{{ url_for('protestos') }}">
+                Protestos
+            </a>
 
-        <label>
-            Região
-        </label>
+        </nav>
 
-        <select id="filtro-regiao">
-
-            <option value="todas">
-                Todos
-            </option>
-
-            <option value="africa">
-                África
-            </option>
-
-            <option value="europa">
-                Europa
-            </option>
-
-            <option value="america">
-                Américas
-            </option>
-
-            <option value="asia">
-                Ásia
-            </option>
-
-        </select>
+    </header>
 
 
-        <label>
-            Rota
-        </label>
+    <!-- CONTEÚDO -->
 
-        <select id="filtro-rota">
-
-            <option value="todas">
-                Todas as rotas
-            </option>
-
-        </select>
+    <main>
 
 
-        <button
-            class="botao-filtro"
-            onclick="aplicarFiltros()"
-        >
+        <!-- INTRODUÇÃO -->
 
-            ⚙
-            Aplicar filtros
+        <section class="introducao">
 
-        </button>
+            <span>
+                CIARTEC • MIGRAÇÃO
+            </span>
 
 
-        <div class="citacao">
+            <h1>
+                Rotas Migratórias
+            </h1>
 
-            <span>“</span>
 
             <p>
-                Migrar é um direito humano.
-                A solidariedade não tem fronteiras.
+                Explore algumas das principais rotas migratórias,
+                seus contextos, origens, destinos e dificuldades
+                enfrentadas por migrantes e refugiados.
             </p>
 
-        </div>
-
-    </aside>
+        </section>
 
 
 
-    <!-- =====================================
-         CONTEÚDO
-    ====================================== -->
+        <!-- MAPA -->
 
-    <main class="conteudo">
-
-        <div class="dashboard">
+        <section class="mapa-container">
 
 
-            <!-- =================================
-                 CABEÇALHO
-            ================================== -->
+            <!-- TÍTULO -->
 
-            <section class="dashboard-header">
-
-                <span>
-                    MAPA INTERATIVO
-                </span>
+            <div class="titulo-mapa">
 
                 <h2>
-                    Rotas de Migração e Refúgio
+                    Mapa das rotas migratórias
                 </h2>
 
+
                 <p>
-                    Explore o mapa interativo e visualize
-                    as principais rotas migratórias,
-                    fronteiras e deslocamentos ao redor do mundo.
+                    Clique nos pontos e nas rotas para visualizar
+                    informações.
                 </p>
-
-            </section>
-
-
-
-            <!-- =================================
-                 MAPA + RESUMO
-            ================================== -->
-
-            <section
-                class="mapa-dashboard"
-                id="mapa"
-            >
-
-                <div class="mapa-area">
-
-
-                    <div class="mapa-controles">
-
-                        <button onclick="mapa.zoomIn()">
-                            +
-                        </button>
-
-                        <button onclick="mapa.zoomOut()">
-                            −
-                        </button>
-
-                    </div>
-
-
-                    <div id="mapa"></div>
-
-
-                    <div class="mapa-legenda">
-
-                        <div>
-                            <i class="linha azul"></i>
-                            Rotas principais
-                        </div>
-
-                        <div>
-                            <i class="linha tracejada"></i>
-                            Rotas secundárias
-                        </div>
-
-                        <div>
-                            <i class="bolinha verde"></i>
-                            Origem
-                        </div>
-
-                        <div>
-                            <i class="bolinha vermelho"></i>
-                            Destino
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- =============================
-                     RESUMO GLOBAL
-                ============================== -->
-
-                <aside class="resumo-global">
-
-                    <h3>
-                        Resumo Global (2024)
-                    </h3>
-
-
-                    <div class="resumo-card roxo">
-
-                        <div class="resumo-icone">
-                            👥
-                        </div>
-
-                        <div>
-
-                            <span>
-                                Refugiados no mundo
-                            </span>
-
-                            <strong>
-                                42,7 milhões
-                            </strong>
-
-                            <small>
-                                Final de 2024
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="resumo-card azul">
-
-                        <div class="resumo-icone">
-                            🛂
-                        </div>
-
-                        <div>
-
-                            <span>
-                                Solicitantes de asilo
-                            </span>
-
-                            <strong>
-                                8,4 milhões
-                            </strong>
-
-                            <small>
-                                Pedidos pendentes
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="resumo-card verde">
-
-                        <div class="resumo-icone">
-                            🏠
-                        </div>
-
-                        <div>
-
-                            <span>
-                                Deslocados internos
-                            </span>
-
-                            <strong>
-                                73,5 milhões
-                            </strong>
-
-                            <small>
-                                Por conflito ou violência
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="resumo-card laranja">
-
-                        <div class="resumo-icone">
-                            🌍
-                        </div>
-
-                        <div>
-
-                            <span>
-                                Deslocamento forçado
-                            </span>
-
-                            <strong>
-                                123,2 milhões
-                            </strong>
-
-                            <small>
-                                Pessoas no mundo
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="fonte-resumo">
-
-                        Fonte:
-                        ACNUR — Global Trends 2024
-
-                    </div>
-
-                </aside>
-
-            </section>
-
-
-
-            <!-- =================================
-                 PAINEL DA ROTA
-            ================================== -->
-
-            <section
-                id="painel-rota"
-                class="painel-rota"
-            >
-
-                <div class="painel-vazio">
-
-                    <span>
-                        🗺️
-                    </span>
-
-                    <h3>
-                        Selecione uma rota
-                    </h3>
-
-                    <p>
-                        Clique em uma linha ou ponto
-                        do mapa para visualizar os detalhes.
-                    </p>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================
-                 GRÁFICOS E DADOS
-            ================================== -->
-
-            <section
-                class="cards-dashboard"
-                id="graficos"
-            >
-
-
-                <!-- DISTRIBUIÇÃO DAS ROTAS -->
-
-                <div class="dashboard-card">
-
-                    <h3>
-                        Distribuição das Rotas
-                    </h3>
-
-                    <div class="grafico-container">
-
-                        <canvas id="grafico-rotas"></canvas>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- DADOS DAS ROTAS -->
-
-                <div class="dashboard-card">
-
-                    <h3>
-                        Dados das Rotas
-                    </h3>
-
-                    <div class="grafico-container">
-
-                        <canvas id="grafico-evolucao"></canvas>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- PRINCIPAIS ORIGENS -->
-
-                <div
-                    class="dashboard-card"
-                    id="paises"
-                >
-
-                    <h3>
-                        Principais regiões de origem
-                    </h3>
-
-                    <div
-                        id="lista-origens"
-                        class="tabela"
-                    >
-
-                        <p>
-                            Carregando dados...
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- INFORMAÇÕES DO PROJETO -->
-
-                <div class="dashboard-card">
-
-                    <h3>
-                        Informações do projeto
-                    </h3>
-
-
-                    <div class="noticia">
-
-                        <div>
-                            📚
-                        </div>
-
-                        <p>
-                            Os dados apresentados são
-                            organizados a partir das
-                            rotas cadastradas no projeto.
-                        </p>
-
-                    </div>
-
-
-                    <div class="noticia">
-
-                        <div>
-                            🌎
-                        </div>
-
-                        <p>
-                            O mapa permite explorar
-                            diferentes trajetos migratórios
-                            ao redor do mundo.
-                        </p>
-
-                    </div>
-
-
-                    <div class="noticia">
-
-                        <div>
-                            ⚖️
-                        </div>
-
-                        <p>
-                            O projeto aborda migração,
-                            refúgio e direitos humanos.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <!-- =================================
-                 FONTES
-            ================================== -->
-
-            <div class="fontes-dashboard">
-
-                <strong>
-                    Fontes dos dados:
-                </strong>
-
-                ACNUR/UNHCR — Global Trends 2024.
-                Dados referentes ao final de 2024.
 
             </div>
 
 
-        </div>
+
+            <!-- FILTRO -->
+
+            <div class="filtro-rotas">
+
+                <label for="filtro-rota">
+                    Filtrar rota:
+                </label>
+
+
+                <select id="filtro-rota">
+
+                    <option value="todas">
+                        Todas as rotas
+                    </option>
+
+
+                    <option value="1">
+                        Rota do Mediterrâneo Central
+                    </option>
+
+
+                    <option value="2">
+                        Rota do Mediterrâneo Ocidental
+                    </option>
+
+
+                    <option value="3">
+                        Rota do Atlântico
+                    </option>
+
+
+                    <option value="4">
+                        Rota do Darién
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- MAPA + PAINEL -->
+
+            <div class="area-mapa">
+
+
+                <!-- MAPA -->
+
+                <div id="mapa"></div>
+
+
+                <!-- PAINEL -->
+
+                <div
+                    id="painel-rota"
+                    class="painel-rota"
+                >
+
+                    <h2>
+                        Selecione uma rota
+                    </h2>
+
+
+                    <p>
+                        Escolha uma rota no filtro acima
+                        ou clique em uma rota no mapa
+                        para visualizar mais informações.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CARDS -->
+
+        <section class="informacoes">
+
+
+            <div class="card">
+
+                <h3>
+                    🌍 Rotas
+                </h3>
+
+
+                <p>
+                    Representação de diferentes caminhos utilizados
+                    durante processos migratórios.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    ⚠️ Dificuldades
+                </h3>
+
+
+                <p>
+                    As pessoas podem enfrentar conflitos, violência,
+                    exploração, barreiras fronteiriças e riscos
+                    durante o deslocamento.
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    📚 Fontes
+                </h3>
+
+
+                <p>
+                    As informações do projeto serão baseadas em
+                    fontes institucionais e organismos internacionais.
+                </p>
+
+            </div>
+
+
+        </section>
 
     </main>
 
-</div>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        <p>
+            Projeto CIARTEC — Migração, Refugiados e Direitos Humanos
+        </p>
+
+    </footer>
 
 
 
-<!-- =========================================
-     RODAPÉ
-========================================= -->
+    <!-- Leaflet JS -->
 
-<footer class="footer">
-
-    <div>
-
-        🌐 <strong>CIARTEC</strong>
-
-        <br>
-
-        © 2024 - Todos os direitos reservados
-
-    </div>
-
-
-    <div class="footer-links">
-
-        <span>
-            Fontes
-        </span>
-
-        <span>
-            Metodologia
-        </span>
-
-        <span>
-            Contato
-        </span>
-
-    </div>
-
-</footer>
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
 
 
 
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
+    <!-- Nosso JavaScript -->
 
-<!-- Leaflet -->
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-
-<!-- Chart.js -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-
-
-<!-- JavaScript do mapa -->
-
-<script src="{{ url_for('static', filename='js/mapa.js') }}"></script>
-
-
-<!-- JavaScript dos gráficos -->
-
-<script src="{{ url_for('static', filename='js/grafico.js') }}"></script>
+    <script
+        src="{{ url_for('static', filename='js/mapa.js') }}">
+    </script>
 
 
 </body>

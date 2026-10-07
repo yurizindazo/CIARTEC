@@ -1,327 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Direitos | CIARTEC</title>
+    <title>Direitos Humanos | Entre-Fronteiras</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
-<header class="cabecalho">
+    <header>
 
-    <div class="logo">
-        <strong>CIARTEC</strong>
-        <span>Migração, Refugiados e Direitos</span>
-    </div>
+        <h1>ENTRE-FRONTEIRAS</h1>
 
-    <nav>
-        <a href="{{ url_for('inicio') }}">Início</a>
-        <a href="{{ url_for('migracao') }}">Migração</a>
-        <a href="{{ url_for('refugiados') }}">Refugiados</a>
-        <a href="{{ url_for('direitos') }}">Direitos</a>
-        <a href="{{ url_for('protestos') }}">Protestos</a>
-    </nav>
+        <nav>
+            <a href="../index.html">Início</a>
+            <a href="migracao.html">Migração</a>
+            <a href="refugiados.html">Refugiados</a>
+            <a href="direitos.html">Direitos Humanos</a>
+            <a href="protestos.html">Protestos</a>
+        </nav>
 
-</header>
+    </header>
 
 
-<main>
+    <main>
 
-    <section class="hero-direitos">
+        <section class="pagina-intro">
 
-        <span>CIARTEC • DIREITOS HUMANOS</span>
+            <p class="etiqueta">03 — DIREITOS HUMANOS</p>
 
-        <h1>
-            Direitos e proteção de pessoas migrantes e refugiadas
-        </h1>
-
-        <p>
-            Conheça alguns dos princípios e direitos relacionados
-            à proteção, segurança e dignidade das pessoas em
-            situação de migração ou deslocamento forçado.
-        </p>
-
-    </section>
-
-
-    <section class="direitos-intro">
-
-        <div>
-            <span class="tag">DIREITOS HUMANOS</span>
-
-            <h2>
-                Proteção e dignidade
-            </h2>
+            <h2>Direitos que atravessam fronteiras.</h2>
 
             <p>
-                Pessoas migrantes e refugiadas possuem direitos
-                fundamentais que devem ser respeitados,
-                independentemente de sua origem ou situação.
+                A história da migração também é uma história de conquistas,
+                conflitos e reconhecimento de direitos.
             </p>
+
+        </section>
+
+
+        <section class="conteudo">
+
+            <h2>Linha do tempo</h2>
 
             <p>
-                A proteção desses direitos envolve acesso à
-                documentação, segurança, serviços essenciais
-                e tratamento digno.
-            </p>
-        </div>
-
-        <div class="destaque-direito">
-
-            <span>⚖️</span>
-
-            <strong>
-                Direitos fundamentais
-            </strong>
-
-            <p>
-                A dignidade humana é um princípio fundamental
-                na proteção de pessoas em situação de
-                deslocamento.
+                Aqui ficará a timeline interativa dos principais
+                acontecimentos relacionados aos direitos de migrantes
+                e refugiados.
             </p>
 
-        </div>
+        </section>
 
-    </section>
+    </main>
 
 
-    <section class="cards-direitos">
+    <footer>
 
-        <div class="card-direito">
+        <p>ENTRE-FRONTEIRAS</p>
 
-            <span class="icone-direito">🛂</span>
-
-            <h3>
-                Documentação
-            </h3>
-
-            <p>
-                O acesso à documentação e aos procedimentos
-                aplicáveis é importante para que a pessoa possa
-                regularizar sua situação e acessar serviços.
-            </p>
-
-        </div>
-
-
-        <div class="card-direito">
-
-            <span class="icone-direito">🏥</span>
-
-            <h3>
-                Acesso a serviços
-            </h3>
-
-            <p>
-                Pessoas em situação de migração podem enfrentar
-                diferentes barreiras para acessar serviços
-                essenciais e assistência.
-            </p>
-
-        </div>
-
-
-        <div class="card-direito">
-
-            <span class="icone-direito">🏠</span>
-
-            <h3>
-                Segurança e proteção
-            </h3>
-
-            <p>
-                A proteção contra violência, exploração e
-                outras formas de abuso é parte importante
-                da garantia da dignidade humana.
-            </p>
-
-        </div>
-
-
-        <div class="card-direito">
-
-            <span class="icone-direito">📚</span>
-
-            <h3>
-                Educação
-            </h3>
-
-            <p>
-                O acesso à educação pode contribuir para a
-                integração e para a reconstrução da vida
-                após o deslocamento.
-            </p>
-
-        </div>
-
-
-        <div class="card-direito">
-
-            <span class="icone-direito">💼</span>
-
-            <h3>
-                Trabalho
-            </h3>
-
-            <p>
-                O acesso ao trabalho e a condições dignas de
-                emprego pode ser importante para a autonomia
-                e integração.
-            </p>
-
-        </div>
-
-
-        <div class="card-direito">
-
-            <span class="icone-direito">🤝</span>
-
-            <h3>
-                Não discriminação
-            </h3>
-
-            <p>
-                A proteção dos direitos humanos também envolve
-                combater discriminação e tratamento desigual.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <section class="principios">
-
-        <div class="titulo-secao">
-
-            <span>PRINCÍPIOS</span>
-
-            <h2>
-                O que orienta a proteção?
-            </h2>
-
-            <p>
-                Alguns princípios são fundamentais para compreender
-                a proteção de pessoas migrantes e refugiadas.
-            </p>
-
-        </div>
-
-
-        <div class="principios-grid">
-
-            <div class="principio">
-
-                <strong>01</strong>
-
-                <h3>Dignidade humana</h3>
-
-                <p>
-                    Toda pessoa deve ser tratada com respeito
-                    e dignidade.
-                </p>
-
-            </div>
-
-
-            <div class="principio">
-
-                <strong>02</strong>
-
-                <h3>Proteção</h3>
-
-                <p>
-                    Pessoas em situação de vulnerabilidade
-                    podem necessitar de mecanismos de proteção.
-                </p>
-
-            </div>
-
-
-            <div class="principio">
-
-                <strong>03</strong>
-
-                <h3>Igualdade</h3>
-
-                <p>
-                    Direitos fundamentais devem ser respeitados
-                    sem discriminação.
-                </p>
-
-            </div>
-
-
-            <div class="principio">
-
-                <strong>04</strong>
-
-                <h3>Acesso à informação</h3>
-
-                <p>
-                    Conhecer direitos e procedimentos facilita
-                    o acesso à proteção e aos serviços.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <section class="fontes-direitos">
-
-        <h2>
-            Fontes
-        </h2>
-
-        <p>
-            O conteúdo desta página deve ser consultado junto
-            a fontes institucionais e organismos especializados.
-        </p>
-
-        <div class="fontes-direitos-lista">
-
-            <div>
-                <strong>ACNUR</strong>
-                <span>
-                    Agência da ONU para Refugiados
-                </span>
-            </div>
-
-            <div>
-                <strong>OIM</strong>
-                <span>
-                    Organização Internacional para as Migrações
-                </span>
-            </div>
-
-            <div>
-                <strong>Governo Federal</strong>
-                <span>
-                    Informações oficiais sobre refúgio e migração
-                </span>
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <p>
-        Projeto CIARTEC — Migração, Refugiados e Direitos Humanos
-    </p>
-
-</footer>
+    </footer>
 
 </body>
+
 </html>
