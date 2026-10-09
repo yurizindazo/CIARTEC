@@ -10,8 +10,8 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #14253d;
+    background: #a3f2f7;
+    color: #056988;
 }
 
 
@@ -21,7 +21,7 @@ body {
 
 .cabecalho {
     height: 78px;
-    background: #071a2f;
+    background: #064547;
 
     display: flex;
     align-items: center;
@@ -82,7 +82,7 @@ body {
 .menu a:hover,
 .menu a.ativo {
     color: white;
-    border-bottom-color: #4385ff;
+    border-bottom-color: #43e3ff;
 }
 
 
@@ -106,8 +106,8 @@ body {
 
     background: linear-gradient(
         120deg,
-        #0a2340,
-        #123d68
+        #043544,
+        #81bed1
     );
 
     border-radius: 18px;
@@ -135,7 +135,7 @@ body {
     font-size: 12px;
     font-weight: bold;
 
-    color: #73a7ff;
+    color: #73f6ff;
 
     letter-spacing: 1.5px;
 
@@ -186,13 +186,13 @@ body {
 
 
 .botao.principal {
-    background: #367cf5;
+    background: #4191a5;
     color: white;
 }
 
 
 .botao.principal:hover {
-    background: #2868d8;
+    background: #064c61;
 }
 
 
@@ -278,7 +278,7 @@ body {
 
     align-items: flex-start;
 
-    box-shadow: 0 3px 12px #14253d08;
+    box-shadow: 0 3px 12px #14383d08;
 }
 
 
@@ -351,7 +351,7 @@ body {
 
     font-weight: bold;
 
-    color: #3478e5;
+    color: #1094a5;
 
     letter-spacing: 1.5px;
 }
@@ -438,7 +438,7 @@ body {
 
 
 .area span {
-    color: #3478e5;
+    color: #2e8a9b;
 
     font-size: 14px;
 
@@ -453,7 +453,7 @@ body {
 .frase {
     margin-top: 45px;
 
-    background: #0b2139;
+    background: #0b3239;
 
     border-radius: 15px;
 
@@ -472,7 +472,7 @@ body {
 .aspas {
     font-size: 65px;
 
-    color: #4d8cff;
+    color: #2792a5;
 
     line-height: 0.5;
 }
@@ -492,7 +492,7 @@ body {
 ========================= */
 
 .rodape {
-    background: #071a2f;
+    background: #072f2f;
 
     color: #b8c7d8;
 

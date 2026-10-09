@@ -5,63 +5,251 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Refugiados | Entre-Fronteiras</title>
+    <title>Refugiados | CIARTEC</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/refugiados.css') }}">
 </head>
 
 <body>
 
-    <header>
+<header class="cabecalho">
 
-        <h1>ENTRE-FRONTEIRAS</h1>
+    <div class="logo">
+        <strong>CIARTEC</strong>
+        <span>Migração, Refugiados e Direitos</span>
+    </div>
 
-        <nav>
-            <a href="../index.html">Início</a>
-            <a href="migracao.html">Migração</a>
-            <a href="refugiados.html">Refugiados</a>
-            <a href="direitos.html">Direitos Humanos</a>
-            <a href="protestos.html">Protestos</a>
-        </nav>
+    <nav>
+        <a href="{{ url_for('inicio') }}">Início</a>
+        <a href="{{ url_for('migracao') }}">Migração</a>
+        <a href="{{ url_for('refugiados') }}">Refugiados</a>
+        <a href="{{ url_for('direitos') }}">Direitos</a>
+        <a href="{{ url_for('protestos') }}">Protestos</a>
+    </nav>
 
-    </header>
+</header>
+
+<main>
+
+    <section class="hero-refugiados">
+
+        <span>CIARTEC • REFUGIADOS</span>
+
+        <h1>
+            Refugiados e deslocamento forçado
+        </h1>
+
+        <p>
+            Entenda quem são as pessoas refugiadas, por que ocorre
+            o deslocamento forçado e quais desafios podem surgir
+            durante e depois do deslocamento.
+        </p>
+
+    </section>
 
 
-    <main>
+    <section class="conceito">
 
-        <section class="pagina-intro">
+        <div class="texto-conceito">
 
-            <p class="etiqueta">02 — REFUGIADOS</p>
+            <span class="tag">CONCEITO</span>
 
-            <h2>Histórias por trás dos números.</h2>
+            <h2>O que é uma pessoa refugiada?</h2>
 
             <p>
-                Conheça histórias, desafios e experiências de pessoas
-                que precisaram buscar proteção em outros lugares.
+                Refugiados são pessoas que deixam seu país de origem
+                devido a circunstâncias que podem colocar sua segurança
+                ou liberdade em risco e buscam proteção em outro país.
             </p>
-
-        </section>
-
-
-        <section class="conteudo">
-
-            <h2>Relatos reais</h2>
 
             <p>
-                Aqui serão apresentados relatos em áudio, fotografias
-                autorizadas e histórias de pessoas migrantes e refugiadas.
+                O deslocamento forçado pode estar relacionado a conflitos,
+                perseguições, violência e outras situações que tornam
+                necessário buscar proteção fora do país de origem.
             </p>
 
-        </section>
+        </div>
 
-    </main>
+        <div class="destaque">
+
+            <span>🌍</span>
+
+            <strong>Deslocamento forçado</strong>
+
+            <p>
+                Milhões de pessoas são forçadas a deixar suas casas
+                todos os anos em diferentes regiões do mundo.
+            </p>
+
+        </div>
+
+    </section>
 
 
-    <footer>
+    <section class="cards-refugiados">
 
-        <p>ENTRE-FRONTEIRAS</p>
+        <div class="card-refugiado">
 
-    </footer>
+            <span class="icone">🏠</span>
+
+            <h3>Por que as pessoas se deslocam?</h3>
+
+            <p>
+                Conflitos, perseguições, violência, insegurança e
+                outras circunstâncias podem levar pessoas a buscar
+                proteção em outros locais.
+            </p>
+
+        </div>
+
+
+        <div class="card-refugiado">
+
+            <span class="icone">🛂</span>
+
+            <h3>Busca por proteção</h3>
+
+            <p>
+                Ao chegar a outro país, algumas pessoas podem solicitar
+                proteção internacional de acordo com as regras aplicáveis.
+            </p>
+
+        </div>
+
+
+        <div class="card-refugiado">
+
+            <span class="icone">🤝</span>
+
+            <h3>Integração</h3>
+
+            <p>
+                Depois do deslocamento, acesso a moradia, educação,
+                trabalho, saúde e documentação pode ser importante
+                para a integração social.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="jornada">
+
+        <div class="titulo-secao">
+
+            <span>O PROCESSO</span>
+
+            <h2>Uma jornada marcada por desafios</h2>
+
+            <p>
+                O deslocamento não termina necessariamente quando
+                uma pessoa chega ao destino.
+            </p>
+
+        </div>
+
+
+        <div class="linha-jornada">
+
+            <div class="etapa">
+
+                <div class="numero">01</div>
+
+                <h3>Partida</h3>
+
+                <p>
+                    A pessoa deixa sua residência diante de uma
+                    situação que compromete sua segurança ou condições
+                    de permanência.
+                </p>
+
+            </div>
+
+
+            <div class="etapa">
+
+                <div class="numero">02</div>
+
+                <h3>Deslocamento</h3>
+
+                <p>
+                    O caminho pode envolver diferentes territórios,
+                    fronteiras e condições de transporte.
+                </p>
+
+            </div>
+
+
+            <div class="etapa">
+
+                <div class="numero">03</div>
+
+                <h3>Busca por proteção</h3>
+
+                <p>
+                    Ao chegar a outro território, a pessoa pode
+                    buscar proteção conforme as possibilidades
+                    previstas pelas autoridades.
+                </p>
+
+            </div>
+
+
+            <div class="etapa">
+
+                <div class="numero">04</div>
+
+                <h3>Integração</h3>
+
+                <p>
+                    A reconstrução da vida pode envolver acesso a
+                    serviços, documentação, educação e trabalho.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="fontes">
+
+        <h2>Fontes e informações</h2>
+
+        <p>
+            O conteúdo desta página será complementado com dados
+            de organismos internacionais e instituições oficiais.
+        </p>
+
+        <div class="fontes-lista">
+
+            <div>
+                <strong>ACNUR</strong>
+                <span>Agência da ONU para Refugiados</span>
+            </div>
+
+            <div>
+                <strong>OIM</strong>
+                <span>Organização Internacional para as Migrações</span>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Projeto CIARTEC — Migração, Refugiados e Direitos Humanos
+    </p>
+
+</footer>
 
 </body>
 
