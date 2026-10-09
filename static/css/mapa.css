@@ -2891,3 +2891,356 @@ body {
     }
 
 }
+
+
+/* ==========================================
+   PAINEL DE INFORMAÇÕES — CIARTEC
+========================================== */
+
+.mapa-area {
+    position: relative;
+    min-width: 0;
+}
+
+.painel-rotas-migracao {
+    position: absolute;
+    z-index: 700;
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+
+    width: min(340px, 38%);
+    max-height: none;
+    box-sizing: border-box;
+
+    padding: 18px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: linear-gradient(160deg, #10243d, #0b192c);
+    color: #f8fafc;
+
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.28);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateX(12px);
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.painel-rotas-migracao.ativo {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+.painel-rotas-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.painel-rotas-cabecalho h3 {
+    margin: 6px 0 0;
+    color: #ffffff;
+    font-size: 23px;
+    line-height: 1.25;
+}
+
+.painel-rotas-cabecalho span {
+    color: #67e8f9;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.painel-rotas-cabecalho button {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 10px;
+    background: #263b55;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.painel-rotas-cabecalho button:hover {
+    background: #0e7490;
+}
+
+.introducao-rotas {
+    margin: 0 0 16px;
+    color: #b8c7d9;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+#conteudo-noticias-rotas {
+    display: grid;
+    gap: 12px;
+}
+
+.noticia-rota {
+    padding: 15px;
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+    background: rgba(30, 48, 73, 0.88);
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.noticia-rota:hover {
+    transform: translateY(-2px);
+    border-color: rgba(103, 232, 249, 0.45);
+}
+
+.noticia-rota-topo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 12px;
+}
+
+.noticia-icone {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #263f60;
+    font-size: 17px;
+}
+
+.noticia-rota-topo span {
+    color: #67e8f9;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.noticia-rota h4 {
+    margin: 0 0 9px;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.45;
+}
+
+.noticia-rota p {
+    margin: 0;
+    color: #c4d0df;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.noticia-rota .fonte {
+    margin-top: 13px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+    color: #8fa7c0;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Telas menores */
+@media (max-width: 900px) {
+    .painel-rotas-migracao {
+        width: min(320px, 48%);
+        padding: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .painel-rotas-migracao {
+        top: 8px;
+        right: 8px;
+        bottom: 8px;
+        width: min(300px, calc(100% - 16px));
+    }
+}
+
+/* Painel de informações mais confortável */
+.painel-rotas-migracao {
+    width: 360px;
+    max-width: calc(100% - 24px);
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 18px;
+}
+
+.painel-rotas-migracao .painel-rotas-cabecalho h3 {
+    font-size: 24px;
+    line-height: 1.3;
+}
+
+.painel-rotas-migracao .introducao-rotas {
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.painel-rotas-migracao .noticia-rota {
+    padding: 16px;
+}
+
+.painel-rotas-migracao .noticia-rota h4 {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.painel-rotas-migracao .noticia-rota p {
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+@media (max-width: 600px) {
+    .painel-rotas-migracao {
+        width: calc(100% - 16px);
+        max-width: none;
+        top: 8px;
+        right: 8px;
+        bottom: 8px;
+    }
+}
+
+
+/* Cartões inferiores do dashboard */
+.cards-dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+    align-items: stretch;
+}
+
+.dashboard-card {
+    min-width: 0;
+    min-height: 0;
+    padding: 14px;
+    overflow: hidden;
+}
+
+.dashboard-card h3 {
+    margin: 0 0 12px;
+    font-size: 14px;
+}
+
+/* Área interna dos gráficos */
+.dashboard-card canvas {
+    display: block;
+    max-width: 100%;
+}
+
+.grafico-container {
+    position: relative;
+    height: 190px;
+    min-width: 0;
+}
+
+/* Lista de origens */
+#lista-origens > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #e5edf3;
+    font-size: 12px;
+}
+
+#lista-origens strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#lista-origens span {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Informações do projeto */
+.dashboard-card p {
+    line-height: 1.5;
+}
+
+/* Layout para telas menores */
+@media (max-width: 1100px) {
+    .cards-dashboard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .cards-dashboard {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+
+.dashboard-card .grafico-container {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    margin: 8px auto 0;
+}
+
+.dashboard-card .grafico-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.dashboard-card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+
+/* Cartão de distribuição das rotas */
+.cartao-grafico {
+    min-width: 0;
+    overflow: hidden;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #d9e4ef;
+    border-radius: 10px;
+}
+
+.cartao-grafico h3 {
+    margin: 0 0 14px;
+    color: #123c52;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.area-grafico-rosca {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+}
+
+.area-grafico-rosca canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.cartao-grafico p {
+    overflow-wrap: anywhere;
+}

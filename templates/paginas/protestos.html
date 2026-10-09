@@ -53,27 +53,34 @@
 
 <section class="globo-protestos">
 
-    <div class="globo-cabecalho">
-        <span>MAPA DOS PROTESTOS</span>
-
-        <h2>
-            Mobilizações ao redor do mundo
-        </h2>
-
-        <p>
-            Explore os locais onde manifestações relacionadas à migração
-            e aos direitos humanos aconteceram.
-        </p>
+    <div class="globo-marca">
+        <strong>CIARTEC</strong>
+        <span>MIGRAÇÃO • DIREITOS HUMANOS</span>
     </div>
 
-    <div class="globo-container">
+    <div class="globo-instrucoes">
+        <span>Arraste para girar o globo</span>
+        <span>Clique nos pins para explorar</span>
+    </div>
 
+    <div class="globo-area">
         <div id="globo"></div>
+
+<div class="painel-protesto" id="painel-protesto">
+    <button id="fechar-painel" aria-label="Fechar">×</button>
+
+    <span class="painel-tag">MAPA CIARTEC</span>
+
+    <h3 id="titulo-ponto">Selecione um protesto</h3>
+
+    <div id="texto-ponto">
+        Clique em um pin laranja no globo para ver os detalhes do protesto.
+    </div>
+</div>
 
     </div>
 
 </section>
-
 
 
     <section class="protestos-intro">
@@ -314,25 +321,217 @@
 </footer>
 
 <script>
+    const elementoGlobo = document.getElementById("globo");
 
-    const globo = Globe()
-        (document.getElementById("globo"))
+    // Dados dos protestos de defesa de migrantes e refugiados
+    const pontosProtestos = [
+        {
+            lat: 39.1, lng: 26.55,
+            nome: "Protestos de refugiados em Lesbos",
+            pais: "Grécia",
+            data: "Fevereiro de 2020",
+            participantes: "Refugiados e solicitantes de asilo, incluindo afegãos",
+            motivo: "Condições precárias no campo de Moria, demora nos pedidos de asilo e restrições à liberdade.",
+            consequencia: "As manifestações deram visibilidade à crise humanitária. Não há confirmação de que tenham resolvido os problemas reivindicados.",
+            fonte: "https://refugeeobservatory.aegean.gr/en/observatory-news-bulletin-major-crisis-protection-asylum-seekers-moria-ric-and-recent-protests?language_content_entity=en"
+        },
+        {
+            lat: 32.89, lng: 13.19,
+            nome: "Protesto de refugiados diante do ACNUR",
+            pais: "Líbia",
+            data: "Outubro de 2021",
+            participantes: "Refugiados e solicitantes de asilo",
+            motivo: "Pedido de proteção e evacuação para locais seguros, em meio a detenções e despejos.",
+            consequencia: "O protesto chamou atenção para a situação dos refugiados. Não está confirmado que a manifestação tenha garantido a evacuação de todos os participantes.",
+            fonte: "https://civilmrcc.eu/echoes-from-the-central-mediterranean/"
+        },
+        {
+            lat: 52.52, lng: 13.405,
+            nome: "Manifestação #unteilbar",
+            pais: "Alemanha",
+            data: "13 de outubro de 2018",
+            participantes: "Centenas de milhares de manifestantes, segundo os organizadores",
+            motivo: "Combate ao racismo e à exclusão e defesa de uma sociedade solidária e do direito de asilo.",
+            consequencia: "Mobilização pública de grande escala em defesa da solidariedade. Não atribuímos uma mudança legislativa específica ao ato.",
+            fonte: "https://www.unteilbar.org/aktionen/unteilbar-2018/"
+        },
+        {
+            lat: 48.857, lng: 2.352,
+            nome: "Ato de apoio aos refugiados em Paris",
+            pais: "França",
+            data: "5 de setembro de 2015",
+            participantes: "Milhares de participantes; cerca de 8.500 segundo estimativa policial divulgada pela imprensa",
+            motivo: "Solidariedade com migrantes e refugiados durante a crise de deslocamento na Europa.",
+            consequencia: "O ato tornou pública a mobilização por acolhimento. Não há comprovação de que tenha causado diretamente medidas governamentais posteriores.",
+            fonte: "https://www.lemonde.fr/societe/article/2015/09/05/plusieurs-milliers-de-personnes-rassemblees-place-de-la-republique-a-paris-en-soutien-aux-migrants_4746962_3224.html"
+        },
+        {
+            lat: 51.507, lng: -0.128,
+            nome: "Marcha Refugees Welcome",
+            pais: "Reino Unido",
+            data: "12 de setembro de 2015",
+            participantes: "Manifestantes e organizações de apoio aos refugiados",
+            motivo: "Pressão por maior acolhimento e proteção humanitária.",
+            consequencia: "A marcha ampliou a visibilidade pública da demanda por acolhimento. O compromisso britânico de reassentar refugiados sírios não deve ser atribuído exclusivamente ao protesto.",
+            fonte: "https://www.theguardian.com/world/2015/sep/12/refugees-welcome-uk-marchers-un-warns-war-syria-million-displaced"
+        },
+        {
+            lat: -23.55, lng: -46.63,
+            nome: "Ato pelo direito de migrar",
+            pais: "Brasil",
+            data: "14 de março de 2026 — confirmar registro",
+            participantes: "Participantes de ato em defesa dos direitos dos migrantes",
+            motivo: "Denúncia da criminalização de migrantes e defesa do direito de migrar.",
+            consequencia: "Ainda precisamos verificar fontes posteriores para identificar resultados concretos.",
+            fonte: "https://www.cut.org.br/noticias/ato-em-sp-denuncia-criminalizacao-de-migrantes-e-defende-direito-de-migrar-f7d7"
+        },
+        {
+            lat: 60.17, lng: 24.94,
+            nome: "Movimento Oikeus elää",
+            pais: "Finlândia",
+            data: "Dezembro de 2016",
+            participantes: "Solicitantes de asilo e apoiadores",
+            motivo: "Contestação das deportações e defesa do direito de permanecer no país.",
+            consequencia: "A mobilização tornou públicas as preocupações dos solicitantes de asilo. Não há comprovação de que tenha suspendido deportações de forma geral.",
+            fonte: "https://yle.fi/a/3-9333061"
+        },
+        {
+            lat: 52.21, lng: 5.97,
+            nome: "Protesto por melhores condições de acolhimento",
+            pais: "Países Baixos",
+            data: "8 de dezembro de 2015",
+            participantes: "Cerca de 100 solicitantes de asilo, segundo a reportagem",
+            motivo: "Condições precárias no alojamento temporário e demora no início dos procedimentos de asilo.",
+            consequencia: "Após o protesto, os participantes receberam a informação de que os procedimentos de asilo começariam em breve.",
+            fonte: "https://nos.nl/l/2073918"
+        },
+        {
+            lat: 46.95, lng: 7.45,
+            nome: "Manifestação nacional dos Sans-Papiers",
+            pais: "Suíça",
+            data: "24 de novembro de 2001",
+            participantes: "Migrantes sem documentação e organizações apoiadoras",
+            motivo: "Regularização coletiva, interrupção das expulsões e melhores condições de trabalho.",
+            consequencia: "A mobilização ajudou a colocar a situação dos migrantes sem documentação no debate público. Não significou regularização automática para todos.",
+            fonte: "https://www.swissinfo.ch/ger/schweizer-politik/nationale-demo-der-papierlosen/2389276"
+        },
+        {
+            lat: 14.91, lng: -92.26,
+            nome: "Caravana migrante de Tapachula",
+            pais: "México",
+            data: "Junho de 2022",
+            participantes: "Migrantes de diferentes nacionalidades",
+            motivo: "Busca por soluções para a situação migratória e possibilidade de continuar a viagem.",
+            consequencia: "O INM informou sobre a emissão de documentos migratórios para pessoas de uma caravana. A relação exata entre a ação e as reivindicações precisa ser confirmada.",
+            fonte: "https://www.gob.mx/inm/prensa/disuelve-inm-caravana-migrante-que-partio-de-tapachula-chiapas-304822"
+        }
+    ];
+    
+    const globo = Globe()(elementoGlobo)
         .globeImageUrl(
-            "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+            "https://unpkg.com/three-globe/example/img/earth-night.jpg"
         )
-        .bumpImageUrl(
-            "https://unpkg.com/three-globe/example/img/earth-topology.png"
-        )
-        .backgroundColor("#e9eef2");
+        .backgroundColor("#000000")
+        .showAtmosphere(true)
+        .atmosphereColor("#087cff")
+        .atmosphereAltitude(0.20)
+        .width(elementoGlobo.clientWidth)
+        .height(elementoGlobo.clientHeight)
+        .htmlElementsData(pontosProtestos)
+        .htmlLat("lat")
+        .htmlLng("lng")
+        .htmlAltitude(0.02)
+        .htmlElement(d => {
+            const pin = document.createElement("div");
+            pin.className = "pin-protesto";
+            pin.title = `${d.nome} — ${d.pais}`;
 
-    globo
-        .pointLat("lat")
-        .pointLng("lng")
-        .pointColor(() => "#2563eb")
-        .pointRadius(0.45)
-        .pointAltitude(0.02);
+            pin.innerHTML = `
+                <svg viewBox="0 0 26 32" aria-hidden="true">
+                    <path
+                        d="M13 1C6.4 1 1 6.3 1 12.8C1 21 13 31 13 31S25 21 25 12.8C25 6.3 19.6 1 13 1Z"
+                        fill="#ff941f"
+                    />
+                    <circle cx="13" cy="12" r="4.2" fill="#111827"/>
+                </svg>
+            `;
 
+            pin.addEventListener("click", event => {
+                event.stopPropagation();
+
+                document.getElementById("titulo-ponto").textContent = d.nome;
+
+                const textoPonto = document.getElementById("texto-ponto");
+                textoPonto.innerHTML = "";
+
+                const informacoes = [
+                    ["País", d.pais],
+                    ["Data", d.data],
+                    ["Participantes", d.participantes],
+                    ["Motivo", d.motivo],
+                    ["Resultados e consequências", d.consequencia]
+                ];
+
+                informacoes.forEach(([titulo, valor]) => {
+                    const bloco = document.createElement("div");
+                    bloco.style.marginBottom = "14px";
+                    bloco.style.lineHeight = "1.6";
+
+                    const subtitulo = document.createElement("strong");
+                    subtitulo.textContent = titulo + ": ";
+                    subtitulo.style.color = "#55b7ff";
+
+                    const conteudo = document.createElement("span");
+                    conteudo.textContent = valor;
+
+                    bloco.appendChild(subtitulo);
+                    bloco.appendChild(conteudo);
+                    textoPonto.appendChild(bloco);
+                });
+
+                const linkFonte = document.createElement("a");
+                linkFonte.href = d.fonte;
+                linkFonte.target = "_blank";
+                linkFonte.rel = "noopener noreferrer";
+                linkFonte.textContent = "Consultar fonte";
+                linkFonte.style.color = "#55b7ff";
+
+                textoPonto.appendChild(linkFonte);
+
+                document.getElementById("painel-protesto")
+                    .classList.add("ativo");
+
+                globo.controls().autoRotate = false;
+            });
+
+            return pin;
+        });
+
+    // Enquadramento inicial
+    globo.pointOfView({
+        lat: 25,
+        lng: 10,
+        altitude: 1.8
+    }, 1000);
+
+    // Rotação automática suave
+    globo.controls().autoRotate = true;
+    globo.controls().autoRotateSpeed = 0.35;
+    globo.controls().enableZoom = true;
+
+    // Fechar painel
+    document.getElementById("fechar-painel")
+        .addEventListener("click", () => {
+            document.getElementById("painel-protesto")
+                .classList.remove("ativo");
+
+            globo.controls().autoRotate = true;
+        });
+
+    // Redimensionar
+    window.addEventListener("resize", () => {
+        globo
+            .width(elementoGlobo.clientWidth)
+            .height(elementoGlobo.clientHeight);
+    });
 </script>
-
-</body>
-</html>

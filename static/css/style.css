@@ -789,52 +789,302 @@ css
 ======================================== */
 
 .globo-protestos {
-    padding: 90px 6%;
-    background: #f5f7f8;
+    padding: 35px 20px 55px;
+    background: #03060d;
+    color: #ffffff;
 }
 
 .globo-cabecalho {
-    max-width: 750px;
-    margin: 0 auto 40px;
+    max-width: 720px;
+    margin: 0 auto;
     text-align: center;
 }
 
 .globo-cabecalho span {
-    font-size: 12px;
+    color: #2998ff;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
-    color: #64748b;
+    letter-spacing: 3px;
 }
 
 .globo-cabecalho h2 {
     margin: 12px 0;
-    font-size: 42px;
-    line-height: 1.1;
-    color: #17212b;
+    color: #f5f9ff;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.2;
 }
 
 .globo-cabecalho p {
-    max-width: 620px;
+    max-width: 560px;
     margin: 0 auto;
-    color: #64748b;
-    font-size: 16px;
+    color: #9baec5;
+    font-size: 15px;
     line-height: 1.7;
 }
 
-.globo-container {
+/* Área escura do globo */
+
+.globo-area {
+    position: relative;
     width: 100%;
-    max-width: 1200px;
-    height: 650px;
+    max-width: 1250px;
+    height: 680px;
     margin: 0 auto;
-
     overflow: hidden;
-    border-radius: 28px;
-
-    background: #e9eef2;
-    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    background: #03060d;
+    border-radius: 0;
 }
 
 #globo {
     width: 100%;
     height: 100%;
+}
+
+/* Painel de informações */
+
+.painel-protesto {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 5;
+    box-sizing: border-box;
+    width: min(330px, calc(100% - 48px));
+    padding: 26px;
+    border: 1px solid #263c57;
+    border-radius: 16px;
+    background: rgba(8, 17, 32, 0.96);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+.painel-protesto.ativo {
+    display: block;
+}
+
+.painel-protesto h3 {
+    color: #ffffff;
+}
+
+.painel-protesto p {
+    color: #a9bad0;
+    line-height: 1.7;
+}
+
+.painel-tag {
+    color: #ff991f;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+#fechar-painel {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: #17263a;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .globo-protestos {
+        padding: 45px 12px;
+    }
+
+    .globo-area {
+        height: 520px;
+    }
+
+    .painel-protesto {
+        top: auto;
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+        width: auto;
+    }
+}
+
+/* ========================================
+   GLOBO CIARTEC — REFERÊNCIA LITTLE FUJI
+======================================== */
+
+.globo-protestos {
+    position: relative;
+    height: 780px;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+}
+
+.globo-marca {
+    position: absolute;
+    z-index: 3;
+    top: 24px;
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.globo-marca strong {
+    color: #168bff;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.globo-marca span {
+    color: #168bff;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.globo-instrucoes {
+    position: absolute;
+    z-index: 3;
+    top: 30px;
+    left: 27%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #4386c9;
+    font-size: 14px;
+}
+
+.globo-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+#globo {
+    width: 100%;
+    height: 100%;
+}
+
+/* Pins laranja */
+
+.pin-protesto {
+    width: 25px;
+    height: 31px;
+    cursor: pointer;
+    transform: translate(-50%, -90%);
+    transition: transform 0.2s ease;
+    filter: drop-shadow(0 0 5px rgba(255, 145, 0, 0.3));
+}
+
+.pin-protesto:hover {
+    transform: translate(-50%, -100%) scale(1.2);
+}
+
+.pin-protesto svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Painel de detalhes */
+
+.painel-protesto {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    top: 100px;
+    right: 5%;
+    width: 290px;
+    box-sizing: border-box;
+    padding: 25px;
+    border: 1px solid #1b3453;
+    border-radius: 14px;
+    background: rgba(5, 12, 25, 0.96);
+    box-shadow: 0 10px 35px #0008;
+}
+
+.painel-protesto.ativo {
+    display: block;
+}
+
+.painel-protesto h3 {
+    margin: 14px 0 8px;
+    color: white;
+}
+
+.painel-protesto p {
+    color: #a8bbd1;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.painel-tag {
+    color: #ff941f;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+#fechar-painel {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    border: 0;
+    background: transparent;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .globo-protestos {
+        height: 650px;
+    }
+
+    .globo-marca {
+        top: 20px;
+        left: 20px;
+    }
+
+    .globo-marca strong {
+        font-size: 27px;
+    }
+
+    .globo-instrucoes {
+        top: 100px;
+        left: 20px;
+        font-size: 12px;
+    }
+
+    .painel-protesto {
+        top: auto;
+        right: 15px;
+        bottom: 15px;
+        left: 15px;
+        width: auto;
+    }
+}
+.painel-protesto.ativo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+}
+
+#texto-ponto {
+    color: #d6e3f3;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+#texto-ponto a {
+    display: inline-block;
+    margin-top: 12px;
 }
