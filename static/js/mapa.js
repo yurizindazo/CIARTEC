@@ -107,6 +107,48 @@ const fronteirasMuros = [
 
 ];
 
+
+let fronteirasCriadas = false;
+
+function criarMarcadoresFronteiras() {
+    if (fronteirasCriadas) return;
+
+    fronteirasMuros.forEach(fronteira => {
+        const marcador = L.circleMarker(fronteira.coordenadas, {
+            radius: 9,
+            color: "#ffffff",
+            weight: 2,
+            fillColor: "#b85c38",
+            fillOpacity: 1
+        });
+
+        marcador.bindTooltip(fronteira.nome, {
+            direction: "top",
+            sticky: true
+        });
+
+        marcador.bindPopup(`
+            <div class="popup-rota">
+                <strong>${fronteira.nome}</strong>
+                <br><br>
+                <b>Países:</b> ${fronteira.paises}
+                <br><br>
+                <b>Local:</b> ${fronteira.local}
+                <br><br>
+                <b>Contexto:</b> ${fronteira.contexto}
+                <br><br>
+                <b>Impacto migratório:</b> ${fronteira.impacto}
+            </div>
+        `);
+
+        marcador.addTo(camadaFronteiras);
+    });
+
+    fronteirasCriadas = true;
+}
+
+
+
 const cores = {
     1: "#315ee8",
     2: "#f59e0b",
@@ -572,17 +614,13 @@ function aplicarFiltros() {
     console.log("ANO APLICADO:", ano);
     console.log("ROTAS EXIBIDAS:", resultado.length);
 
-    document
-        .getElementById("painel-rotas-migracao")
-        ?.classList.remove("ativo");
-
-    document
-        .getElementById("botao-rotas")
-        ?.classList.remove("ativo-rotas");
-
-    modoRotasAtivo = true;
+    if (!modoRotasAtivo) {
+    esconderTodasRotas();
+    return;
+    }
 
     atualizarMapa(resultado);
+
 }
 // ========================================
 // ATUALIZAR MAPA
@@ -815,33 +853,25 @@ function mostrarPainelVazio(titulo, texto) {
 function alternarRotasMigracao() {
     const botao = document.getElementById("botao-rotas");
 
-    // Se estiver no modo de fronteiras, não alternar as rotas.
     if (modoFronteirasAtivo) {
         return;
     }
 
-    // Se as rotas estiverem visíveis, escondê-las.
-    if (modoRotasAtivo) {
-        esconderTodasRotas();
-        modoRotasAtivo = false;
+    modoRotasAtivo = !modoRotasAtivo;
 
-        botao?.classList.remove("ativo-rotas");
-        botao?.setAttribute("aria-pressed", "false");
+    botao?.classList.toggle("ativo-rotas", modoRotasAtivo);
+    botao?.setAttribute("aria-pressed", String(modoRotasAtivo));
+
+    if (modoRotasAtivo) {
+        aplicarFiltros();
+    } else {
+        esconderTodasRotas();
 
         mostrarPainelVazio(
             "Rotas ocultas",
-            "Clique em Rotas de Migração novamente para exibir as rotas."
+            "Clique em Rotas de Migração para exibir as rotas novamente."
         );
-
-        return;
     }
-
-    // Se estiverem ocultas, aplicar os filtros e exibi-las.
-    modoRotasAtivo = true;
-    aplicarFiltros();
-
-    botao?.classList.add("ativo-rotas");
-    botao?.setAttribute("aria-pressed", "true");
 }
 
 // ========================================
@@ -948,16 +978,6 @@ function selecionarRotaPainel(rota) {
         padding: [80, 80]
     });
 }
-document.getElementById("filtro-ano")?.addEventListener("change", function () {
-    console.log("ANO SELECIONADO:", this.value);
-
-    const rotasDoAno = rotasOriginais.filter(
-        rota => String(rota.ano).trim() === this.value
-    );
-
-    console.log("ROTAS DESSE ANO:", rotasDoAno);
-    console.log("TOTAL DEPOIS DO FILTRO:", rotasDoAno.length);
-});
 
 // ========================================
 // ALTERNAR FRONTEIRAS E MUROS
@@ -967,71 +987,47 @@ function alternarFronteirasMuros() {
     const botao = document.getElementById("botao-fronteiras");
 
     if (modoFronteirasAtivo) {
-        // Voltar para as rotas
         mapa.removeLayer(camadaFronteiras);
-
         modoFronteirasAtivo = false;
 
-        if (botao) {
-            botao.classList.remove("ativo");
-            botao.setAttribute("aria-pressed", "false");
+        botao?.classList.remove("ativo");
+        botao?.setAttribute("aria-pressed", "false");
+
+        if (modoRotasAtivo) {
+            aplicarFiltros();
+        } else {
+            esconderTodasRotas();
+
+            mostrarPainelVazio(
+                "Rotas ocultas",
+                "Ative Rotas de Migração para exibir as rotas novamente."
+            );
         }
 
-        aplicarFiltros();
         return;
     }
 
-    // Esconder as rotas temporariamente
     esconderTodasRotas();
 
-    mostrarPainelVazio(
-        "Fronteiras e Muros",
-        "Clique em um marcador para conhecer a barreira e seu contexto migratório."
-    );
-
-
-    // Criar os marcadores informativos
-    fronteirasMuros.forEach(fronteira => {
-        const marcador = L.circleMarker(fronteira.coordenadas, {
-            radius: 9,
-            color: "#ffffff",
-            weight: 2,
-            fillColor: "#d97706",
-            fillOpacity: 1
-        });
-
-        marcador.bindPopup(`
-            <div class="popup-rota">
-                <strong>${fronteira.nome}</strong>
-                <br><br>
-                <b>Países:</b> ${fronteira.paises}
-                <br>
-                <b>Local:</b> ${fronteira.local}
-                <br><br>
-                <b>Contexto:</b> ${fronteira.contexto}
-                <br><br>
-                <b>Impacto migratório:</b> ${fronteira.impacto}
-            </div>
-        `);
-
-        marcador.addTo(camadaFronteiras);
-    });
-
+    criarMarcadoresFronteiras();
     camadaFronteiras.addTo(mapa);
 
     modoFronteirasAtivo = true;
 
-    if (botao) {
-        botao.classList.add("ativo");
-        botao.setAttribute("aria-pressed", "true");
-    }
+    botao?.classList.add("ativo");
+    botao?.setAttribute("aria-pressed", "true");
+
+    mostrarPainelVazio(
+        "Fronteiras e Muros",
+        "Selecione um marcador para consultar os países, o contexto e os impactos migratórios."
+    );
 
     const limites = L.latLngBounds(
         fronteirasMuros.map(fronteira => fronteira.coordenadas)
     );
 
     mapa.fitBounds(limites, {
-        padding: [40, 40],
-        maxZoom: 5
+        padding: [35, 35],
+        maxZoom: 4
     });
 }

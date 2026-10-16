@@ -195,86 +195,155 @@
 
     </section>
 
+<section class="principios">
 
-    <section class="principios">
+    <div class="titulo-secao">
+        <span>PRINCÍPIOS</span>
+        <h2>O que orienta a proteção?</h2>
+        <p>
+            Alguns princípios são fundamentais para compreender
+            a proteção de pessoas migrantes e refugiadas.
+        </p>
+    </div>
 
-        <div class="titulo-secao">
+    <div class="principios-grid">
 
-            <span>PRINCÍPIOS</span>
+        <button class="card-principio selecionado"
+            data-titulo="Dignidade humana"
+            data-texto="Toda pessoa possui valor e dignidade. A origem, a nacionalidade ou a condição migratória não justificam tratamentos desumanos ou degradantes.">
+            <strong>01</strong>
+            <h3>Dignidade humana</h3>
+            <p>Respeito e dignidade para todas as pessoas.</p>
+        </button>
 
-            <h2>
-                O que orienta a proteção?
-            </h2>
+        <button class="card-principio"
+            data-titulo="Proteção"
+            data-texto="Pessoas em situação de vulnerabilidade podem precisar de proteção contra violência, perseguição, exploração e outras ameaças.">
+            <strong>02</strong>
+            <h3>Proteção</h3>
+            <p>Prevenção da violência e de abusos.</p>
+        </button>
 
-            <p>
-                Alguns princípios são fundamentais para compreender
-                a proteção de pessoas migrantes e refugiadas.
-            </p>
+        <button class="card-principio"
+            data-titulo="Igualdade"
+            data-texto="Os direitos fundamentais devem ser respeitados sem discriminação. As garantias específicas podem variar conforme a legislação aplicável.">
+            <strong>03</strong>
+            <h3>Igualdade</h3>
+            <p>Respeito aos direitos sem discriminação.</p>
+        </button>
 
-        </div>
+        <button class="card-principio"
+            data-titulo="Acesso à informação"
+            data-texto="Informações claras sobre direitos, serviços e procedimentos ajudam as pessoas migrantes e refugiadas a buscar assistência e proteção.">
+            <strong>04</strong>
+            <h3>Acesso à informação</h3>
+            <p>Conhecer direitos e procedimentos.</p>
+        </button>
+
+    </div>
+
+    <div class="detalhe-principio">
+        <span>PRINCÍPIO SELECIONADO</span>
+        <h3 id="principio-titulo">Dignidade humana</h3>
+        <p id="principio-texto">
+            Toda pessoa possui valor e dignidade. A origem,
+            a nacionalidade ou a condição migratória não justificam
+            tratamentos desumanos ou degradantes.
+        </p>
+    </div>
+
+</section>
+
+    <section class="linha-tempo-direitos">
+
+    <div class="titulo-secao">
+        <span>HISTÓRIA</span>
+        <h2>Marcos dos direitos humanos</h2>
+        <p>Explore acontecimentos importantes para a proteção dos direitos humanos e das pessoas refugiadas.</p>
+    </div>
+
+    <div class="marcos">
+        <button class="marco ativo" data-ano="1948"
+            data-titulo="Declaração Universal dos Direitos Humanos"
+            data-texto="A Assembleia Geral da ONU adotou a Declaração Universal dos Direitos Humanos, afirmando direitos e liberdades fundamentais para todas as pessoas.">
+            1948
+        </button>
+
+        <button class="marco" data-ano="1951"
+            data-titulo="Convenção sobre Refugiados"
+            data-texto="A Convenção de 1951 estabeleceu uma base internacional para a proteção dos refugiados e definiu critérios relacionados ao reconhecimento dessa condição.">
+            1951
+        </button>
+
+        <button class="marco" data-ano="1967"
+            data-titulo="Protocolo sobre Refugiados"
+            data-texto="O Protocolo de 1967 ampliou o alcance da Convenção de 1951, removendo suas limitações temporais e geográficas originais.">
+            1967
+        </button>
+
+        <button class="marco" data-ano="1984"
+            data-titulo="Declaração de Cartagena"
+            data-texto="A Declaração de Cartagena contribuiu para ampliar a compreensão regional da proteção de refugiados na América Latina.">
+            1984
+        </button>
+    </div>
+
+    <div class="detalhe-marco">
+        <span id="marco-ano">1948</span>
+        <h3 id="marco-titulo">Declaração Universal dos Direitos Humanos</h3>
+        <p id="marco-texto">A Assembleia Geral da ONU adotou a Declaração Universal dos Direitos Humanos, afirmando direitos e liberdades fundamentais para todas as pessoas.</p>
+    </div>
+
+</section>
+
+<section class="grafico-direitos-secao">
+
+    <div class="titulo-secao">
+        <span>DADOS E CONTEXTO</span>
+        <h2>Deslocamento forçado no mundo</h2>
+        <p>Visualize a evolução do número de pessoas deslocadas à força ao longo dos anos.</p>
+    </div>
 
 
-        <div class="principios-grid">
-
-            <div class="principio">
-
-                <strong>01</strong>
-
-                <h3>Dignidade humana</h3>
-
-                <p>
-                    Toda pessoa deve ser tratada com respeito
-                    e dignidade.
-                </p>
-
-            </div>
+    
+<div class="resumo-grafico">
+    <span>DESLOCAMENTO FORÇADO NO MUNDO</span>
+    <h3>Mais de 117 milhões de pessoas em 2025</h3>
+    <p>
+        Após crescer durante vários anos, o total mundial caiu
+        em relação a 2024. Mesmo assim, o deslocamento forçado
+        continua sendo um desafio humanitário global.
+    </p>
+</div>
 
 
-            <div class="principio">
+    <div class="grafico-controles">
+        <label for="tipo-grafico">Tipo de gráfico:</label>
+        <select id="tipo-grafico">
+            <option value="line">Linha</option>
+            <option value="bar">Barras</option>
+        </select>
+    </div>
 
-                <strong>02</strong>
+    <div class="grafico-container">
+        <canvas id="grafico-direitos"></canvas>
+    </div>
 
-                <h3>Proteção</h3>
-
-                <p>
-                    Pessoas em situação de vulnerabilidade
-                    podem necessitar de mecanismos de proteção.
-                </p>
-
-            </div>
-
-
-            <div class="principio">
-
-                <strong>03</strong>
-
-                <h3>Igualdade</h3>
-
-                <p>
-                    Direitos fundamentais devem ser respeitados
-                    sem discriminação.
-                </p>
-
-            </div>
+   
+<p class="nota-grafico">
+    Fonte: ACNUR — Global Trends 2025.
+    Valores em milhões, calculados pela soma das categorias da
+    tabela oficial de deslocamento forçado mundial.
+    <a href="https://www.unhcr.org/global-trends"
+       target="_blank"
+       rel="noopener noreferrer">
+        Consultar dados oficiais
+    </a>.
+    Os números podem ser revisados pelo ACNUR.
+</p>
 
 
-            <div class="principio">
-
-                <strong>04</strong>
-
-                <h3>Acesso à informação</h3>
-
-                <p>
-                    Conhecer direitos e procedimentos facilita
-                    o acesso à proteção e aos serviços.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
+</section>
 
     <section class="fontes-direitos">
 
@@ -324,6 +393,44 @@
     </p>
 
 </footer>
+
+
+<section class="fontes-oficiais">
+    <div class="titulo-secao">
+        <span>TRANSPARÊNCIA</span>
+        <h2>Fontes e organizações</h2>
+        <p>
+            Consulte instituições que publicam dados, relatórios
+            e orientações sobre migração, refúgio e direitos humanos.
+        </p>
+    </div>
+
+    <div class="fontes-grid">
+        <a href="https://www.unhcr.org/global-trends"
+           target="_blank" rel="noopener noreferrer">
+            <strong>ACNUR</strong>
+            <span>Dados globais sobre refugiados e deslocamento forçado.</span>
+            <small>Consultar relatórios ↗</small>
+        </a>
+
+        <a href="https://www.iom.int/"
+           target="_blank" rel="noopener noreferrer">
+            <strong>Organização Internacional para as Migrações</strong>
+            <span>Informações sobre migração e mobilidade humana.</span>
+            <small>Acessar organização ↗</small>
+        </a>
+
+        <a href="https://www.ohchr.org/"
+           target="_blank" rel="noopener noreferrer">
+            <strong>ONU — Direitos Humanos</strong>
+            <span>Normas internacionais e materiais sobre direitos humanos.</span>
+            <small>Consultar materiais ↗</small>
+        </a>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/direitos.js') }}"></script>
 
 </body>
 </html>

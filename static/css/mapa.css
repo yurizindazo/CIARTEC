@@ -3435,8 +3435,8 @@ body {
     border-radius: 9px;
     background: transparent;
     color: var(--menu-texto);
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 300;
     text-align: left;
     text-decoration: none;
     cursor: pointer;
@@ -3686,3 +3686,60 @@ body {
     text-align: center;
 }
 
+/* Botões da navegação */
+.nav-link {
+    font-weight: 400;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* Efeito ao passar o mouse */
+.nav-link:hover {
+    background-color: #079eae;
+    border-color: #079eae;
+    color: white;
+}
+
+/* Botão selecionado */
+.nav-link.active {
+    background-color: #079eae;
+    border-color: #079eae;
+    color: white;
+    font-weight: 600;
+}
+
+/* Rotas de Migração — destaque igual ao menu */
+#botao-rotas,
+#botao-rotas:focus:not(:focus-visible) {
+    background: transparent;
+    color: #e5f3f5;
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
+/* Mesmo efeito de hover dos demais itens */
+#botao-rotas:hover {
+    background: rgba(8, 201, 232, 0.10);
+    border-color: rgba(8, 201, 232, 0.18);
+    color: #ffffff;
+    box-shadow: none;
+    transform: translateX(2px);
+}
+
+/* Ao clicar, manter o mesmo destaque do menu selecionado */
+#botao-rotas.ativo-rotas {
+    background: #079eaf;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Não perder o destaque ao passar o mouse com o botão ativo */
+#botao-rotas.ativo-rotas:hover {
+    background: #079eaf;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    transform: translateX(2px);
+}
