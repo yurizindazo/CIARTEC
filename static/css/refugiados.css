@@ -1,78 +1,142 @@
+css
+/* ========================================
+   CONFIGURAÇÕES GERAIS
+======================================== */
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #abffff;
-    color: #172f33;
-    line-height: 1.6;
+    background: #a5f0f4;
+    color: #173b43;
+    line-height: 1.7;
 }
 
+/* ========================================
+   CABEÇALHO
+======================================== */
+
 .cabecalho {
-    background: #a4eef5;
-    padding: 20px 7%;
+    background: #064b50;
+    padding: 18px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e5e7eb;
+    gap: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .logo {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .logo strong {
-    font-size: 24px;
+    color: #ffffff;
+    font-size: 25px;
+    letter-spacing: 1px;
 }
 
 .logo span {
+    color: #c4e7e9;
     font-size: 12px;
-    color: #64748b;
 }
 
 nav {
     display: flex;
-    gap: 25px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
 }
 
 nav a {
     text-decoration: none;
-    color: #334155;
+    color: #ffffff;
+    font-size: 14px;
     font-weight: 600;
+    transition: color 0.2s ease;
 }
 
 nav a:hover {
-    color: #25deeb;
+    color: #73e8ef;
 }
+
+/* ========================================
+   DESTAQUE PRINCIPAL — HERO
+======================================== */
 
 .hero-refugiados {
+    min-height: 580px;
     padding: 90px 8%;
-    background: linear-gradient(135deg, #174654, #1e8a81);
-    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #064b50;
+    color: #ffffff;
 }
 
-.hero-refugiados span,
-.tag {
-    font-size: 13px;
+/* Imagem de fundo — existe apenas uma regra para desktop */
+
+.hero-refugiados::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -5%;
+    width: 65%;
+    height: 100%;
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            90deg,
+            #064b50 0%,
+            rgba(6, 75, 80, 0.95) 5%,
+            rgba(6, 75, 80, 0.75) 12%,
+            rgba(6, 75, 80, 0.35) 22%,
+            transparent 35%
+        ),
+        url("/static/imagens/refugiados.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-refugiados > span {
+    font-size: 12px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
+    color: #e8b99b;
 }
 
 .hero-refugiados h1 {
-    max-width: 800px;
-    font-size: 48px;
-    margin: 15px 0;
+    max-width: 52%;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 400;
+    line-height: 1.08;
+    margin: 24px 0;
 }
 
 .hero-refugiados p {
-    max-width: 750px;
-    font-size: 18px;
-    color: #dbeafe;
+    max-width: 45%;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #e2e5df;
 }
+
+/* ========================================
+   CONCEITO DE REFÚGIO
+======================================== */
 
 .conceito {
     max-width: 1100px;
@@ -95,7 +159,7 @@ nav a:hover {
 }
 
 .destaque {
-    background: white;
+    background: #ffffff;
     padding: 30px;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
@@ -115,17 +179,21 @@ nav a:hover {
     color: #64748b;
 }
 
+/* ========================================
+   CARTÕES INFORMATIVOS
+======================================== */
+
 .cards-refugiados {
     max-width: 1100px;
     margin: 0 auto 70px;
     padding: 0 25px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
 }
 
 .card-refugiado {
-    background: white;
+    background: #ffffff;
     padding: 30px;
     border-radius: 16px;
     border: 1px solid #e5e7eb;
@@ -143,8 +211,12 @@ nav a:hover {
     color: #64748b;
 }
 
+/* ========================================
+   JORNADA DO REFUGIADO
+======================================== */
+
 .jornada {
-    background: white;
+    background: #e8fbfc;
     padding: 70px 8%;
 }
 
@@ -155,7 +227,7 @@ nav a:hover {
 }
 
 .titulo-secao span {
-    color: #25d4eb;
+    color: #087e9a;
     font-size: 13px;
     font-weight: bold;
 }
@@ -173,7 +245,7 @@ nav a:hover {
     max-width: 1100px;
     margin: 50px auto 0;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 25px;
 }
 
@@ -185,8 +257,8 @@ nav a:hover {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: #dbeafe;
-    color: #1dc2d8;
+    background: #d5f6f8;
+    color: #087e9a;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -198,6 +270,10 @@ nav a:hover {
     color: #64748b;
     margin-top: 8px;
 }
+
+/* ========================================
+   FONTES E REFERÊNCIAS
+======================================== */
 
 .fontes {
     max-width: 1000px;
@@ -218,11 +294,12 @@ nav a:hover {
 .fontes-lista {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
 .fontes-lista div {
-    background: rgb(151, 240, 247);
+    background: #ffffff;
     padding: 20px 30px;
     border-radius: 12px;
     min-width: 220px;
@@ -239,36 +316,138 @@ nav a:hover {
     font-size: 14px;
 }
 
+/* ========================================
+   RODAPÉ
+======================================== */
+
 footer {
-    background: #112427;
+    background: #064b50;
     color: #cbd5e1;
     text-align: center;
     padding: 25px;
 }
 
-@media (max-width: 800px) {
+/* ========================================
+   RESPONSIVIDADE — TABLETS
+======================================== */
 
+@media (max-width: 800px) {
     .cabecalho {
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 20px;
     }
 
     nav {
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 16px;
+    }
+
+    .conceito {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .cards-refugiados {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .linha-jornada {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ========================================
+   RESPONSIVIDADE — CELULARES
+======================================== */
+
+@media (max-width: 700px) {
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 7%;
+    }
+
+    nav {
+        justify-content: flex-start;
+        gap: 12px 18px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero-refugiados {
+        min-height: 680px;
+        padding: 300px 7% 60px;
+        justify-content: flex-end;
+    }
+
+    /* Imagem específica para celular */
+
+    .hero-refugiados::after {
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 55%;
+
+        background:
+            linear-gradient(
+                180deg,
+                rgba(6, 75, 80, 0.05) 20%,
+                #064b50 100%
+            ),
+            url("/static/imagens/refugiados.jpg");
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .hero-refugiados h1 {
-        font-size: 36px;
+        max-width: 100%;
+        font-size: clamp(38px, 10vw, 52px);
     }
 
-    .conceito,
-    .cards-refugiados,
+    .hero-refugiados p {
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    .conceito {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .texto-conceito h2,
+    .titulo-secao h2 {
+        font-size: 28px;
+    }
+
+    .cards-refugiados {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        margin-bottom: 45px;
+    }
+
+    .jornada {
+        padding: 50px 7%;
+    }
+
     .linha-jornada {
         grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .fontes {
+        margin: 45px auto;
+        padding: 0 20px;
     }
 
     .fontes-lista {
         flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fontes-lista div {
+        min-width: 0;
     }
 }

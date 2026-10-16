@@ -3244,3 +3244,445 @@ body {
 .cartao-grafico p {
     overflow-wrap: anywhere;
 }
+
+
+/* Animação das linhas das rotas */
+.rota-animada {
+    animation: fluxo-rota 2.5s linear infinite;
+}
+
+/* Movimento dos traços */
+@keyframes fluxo-rota {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -36;
+    }
+}
+
+/* Transições suaves quando o estilo muda */
+.leaflet-overlay-pane path {
+    transition:
+        stroke-width 0.25s ease,
+        opacity 0.25s ease,
+        filter 0.25s ease;
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+    .rota-animada {
+        animation: none;
+    }
+
+    .leaflet-overlay-pane path {
+        transition: none;
+    }
+}
+
+
+
+/* Trajeto: origem e destino */
+.painel-trajeto {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #dce6f0;
+    border-radius: 12px;
+}
+
+.ponto-trajeto {
+    min-width: 0;
+    padding: 4px 8px;
+}
+
+.ponto-trajeto > span {
+    display: block;
+    margin-bottom: 8px;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.ponto-trajeto strong {
+    display: block;
+    color: #123b50;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.linha-trajeto {
+    color: #08b8d0;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .painel-trajeto {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .linha-trajeto {
+        transform: rotate(90deg);
+    }
+}
+
+
+/* Legenda atualizada do mapa */
+.legenda-mapa {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    color: #17415a;
+    font-size: 11px;
+}
+
+.item-legenda {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.linha-legenda {
+    display: inline-block;
+    flex: 0 0 26px;
+    height: 0;
+    border-top: 3px solid #315ee8;
+    border-radius: 5px;
+}
+
+.rota-destaque {
+    border-top-color: #08c9e8;
+    border-top-style: dashed;
+}
+
+.pino-legenda {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px #cbd5e1;
+}
+
+.origem-legenda {
+    background: #315ee8;
+}
+
+.destino-legenda {
+    background: #f59e0b;
+}
+
+
+/* =====================================
+   MENU LATERAL — CIARTEC
+===================================== */
+
+:root {
+    --menu-fundo: #073b3b;
+    --menu-fundo-escuro: #062f30;
+    --menu-texto: #e5f3f5;
+    --menu-texto-secundario: #a8c9d0;
+    --menu-destaque: #08c9e8;
+    --menu-ativo: #079eaf;
+}
+
+/* Área de navegação */
+.sidebar nav,
+.sidebar .navegacao,
+.navegacao {
+    padding: 12px 8px;
+}
+
+/* Título da navegação */
+.sidebar h3,
+.sidebar .titulo-navegacao,
+.navegacao-titulo {
+    margin: 8px 14px 16px;
+    color: var(--menu-texto-secundario);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+/* Itens do menu */
+.sidebar nav a,
+.sidebar .item-menu,
+.navegacao a,
+.navegacao button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 46px;
+    margin: 4px 0;
+    padding: 11px 14px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--menu-texto);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Ícones */
+.sidebar nav a i,
+.sidebar nav a svg,
+.sidebar .item-menu i,
+.navegacao a i {
+    flex-shrink: 0;
+    width: 20px;
+    color: var(--menu-texto-secundario);
+    text-align: center;
+}
+
+/* Passar o mouse */
+.sidebar nav a:hover,
+.sidebar .item-menu:hover,
+.navegacao a:hover,
+.navegacao button:hover {
+    background: rgba(8, 201, 232, 0.10);
+    border-color: rgba(8, 201, 232, 0.18);
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+/* Seção selecionada */
+.sidebar nav a.active,
+.sidebar nav a.ativo,
+.sidebar .item-menu.active,
+.sidebar .item-menu.ativo,
+.navegacao a.active,
+.navegacao a.ativo,
+.navegacao button.active,
+.navegacao button.ativo {
+    background: var(--menu-ativo);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Ícone da seção selecionada */
+.sidebar nav a.active i,
+.sidebar nav a.ativo i,
+.sidebar nav a.active svg,
+.sidebar nav a.ativo svg,
+.navegacao a.active i,
+.navegacao a.ativo i {
+    color: #ffffff;
+}
+
+/* Foco pelo teclado */
+.sidebar nav a:focus-visible,
+.sidebar nav button:focus-visible,
+.navegacao a:focus-visible,
+.navegacao button:focus-visible {
+    outline: 2px solid var(--menu-destaque);
+    outline-offset: 3px;
+}
+
+/* Evitar animações para quem prefere movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar nav a,
+    .sidebar .item-menu,
+    .navegacao a,
+    .navegacao button {
+        transition: none;
+    }
+}
+
+
+/* Corrigir fundo branco dos botões do menu */
+.sidebar button,
+.sidebar a,
+.navegacao button,
+.navegacao a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Manter o botão de rotas com o estilo correto */
+#botao-rotas {
+    background-color: transparent;
+    color: #e5f3f5;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Ao passar o mouse */
+#botao-rotas:hover {
+    background-color: rgba(8, 201, 232, 0.10);
+    color: #ffffff;
+    border-color: rgba(8, 201, 232, 0.18);
+}
+
+/* Enquanto estiver sendo clicado */
+#botao-rotas:active {
+    background-color: #079eaf;
+    color: #ffffff;
+}
+
+/* Quando o painel de rotas estiver aberto */
+#botao-rotas.ativo-rotas {
+    background-color: #079eaf;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Evitar que o foco deixe o botão branco */
+#botao-rotas:focus:not(:focus-visible) {
+    background-color: transparent;
+    color: #e5f3f5;
+}
+
+/* Se estiver selecionado e com foco, manter o destaque */
+#botao-rotas.ativo-rotas:focus {
+    background-color: #079eaf;
+    color: #ffffff;
+}
+
+
+/* Padronizar o destaque do botão Rotas de Migração */
+#botao-rotas {
+    background: transparent;
+    color: #e5f3f5;
+    border: 1px solid transparent;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Mesmo efeito de destaque dos outros itens */
+#botao-rotas:hover {
+    background: #079eaf;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateX(2px);
+}
+
+/* Manter o destaque enquanto estiver ativo */
+#botao-rotas.ativo-rotas {
+    background: #079eaf;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Evitar que o foco altere a aparência */
+#botao-rotas:focus:not(:focus-visible) {
+    outline: none;
+}
+
+
+
+/* Igualar tamanho e alinhamento do botão Rotas de Migração */
+#botao-rotas {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 53px;
+    margin: 4px 0;
+    padding: 11px 14px;
+    border-radius: 9px;
+    text-align: left;
+}
+
+/* Destaque ocupando toda a largura do botão */
+#botao-rotas:hover {
+    width: 100%;
+    min-height: 53px;
+    padding: 11px 14px;
+    transform: none;
+}
+
+
+/* Fronteiras e Muros — mesmo estilo de Rotas de Migração */
+#botao-fronteiras {
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 53px;
+    margin: 4px 0;
+    padding: 11px 14px;
+
+    background: transparent;
+    color: #e5f3f5;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    box-shadow: none;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+#botao-fronteiras:hover {
+    background: #079eaf;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Destaque enquanto Fronteiras e Muros estiver selecionado */
+#botao-fronteiras.ativo {
+    background: #079eaf;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Mantém o fundo correto ao receber foco */
+#botao-fronteiras:focus:not(:focus-visible) {
+    outline: none;
+    background: transparent;
+    color: #e5f3f5;
+}
+
+#botao-fronteiras.ativo:focus {
+    background: #079eaf;
+    color: #ffffff;
+}
+
+/* Evita que o ícone altere o alinhamento */
+#botao-fronteiras span {
+    flex-shrink: 0;
+    width: 20px;
+    margin-right: 0;
+    text-align: center;
+}
+

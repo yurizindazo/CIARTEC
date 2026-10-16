@@ -171,18 +171,16 @@
         </button>
 
 
-        <a
-            href="#fronteiras"
+        <button
+            type="button"
             class="sidebar-item"
+            id="botao-fronteiras"
+            onclick="alternarFronteirasMuros()"
+            aria-pressed="false"
         >
-
-            <span>
-                ╫
-            </span>
-
-            Fronteiras e Muros
-
-        </a>
+            <span>╫</span>
+            <strong>Fronteiras e Muros</strong>
+        </button>
 
 
         <a
@@ -220,30 +218,14 @@
             FILTROS
         </div>
 
+<label for="filtro-ano">Ano</label>
 
-        <label>
-            Ano
-        </label>
-
-
-        <select id="filtro-ano">
-
-            <option value="2026">
-                2026 — parcial
-            </option>
-
-            <option value="2025">
-                2025
-            </option>
-
-            <option
-                value="2024"
-                selected
-            >
-                2024
-            </option>
-
-        </select>
+<select id="filtro-ano">
+    <option value="todos" selected>Todos os anos</option>
+    <option value="2024">2024</option>
+    <option value="2025">2025</option>
+    <option value="2026">2026 — Parcial</option>
+</select>
 
 
         <label>
@@ -387,6 +369,7 @@
             <section class="mapa-dashboard">
 
 
+
                 <!-- =================================
                      ÁREA DO MAPA
                 ================================== -->
@@ -493,49 +476,28 @@
                          LEGENDA
                     ================================== -->
 
-                    <div class="mapa-legenda">
-
-
-                        <div>
-
-                            <i class="linha azul"></i>
-
-                            Rotas principais
-
-                        </div>
-
-
-                        <div>
-
-                            <i class="linha tracejada"></i>
-
-                            Rotas secundárias
-
-                        </div>
-
-
-                        <div>
-
-                            <i class="bolinha verde"></i>
-
-                            Origem
-
-                        </div>
-
-
-                        <div>
-
-                            <i class="bolinha vermelho"></i>
-
-                            Destino
-
-                        </div>
-
-
-                    </div>
-
-
+                    
+            <div class="legenda-mapa">
+                <div class="item-legenda">
+                    <span class="linha-legenda rota-normal"></span>
+                    <span>Rota migratória</span>
                 </div>
+
+                <div class="item-legenda">
+                    <span class="linha-legenda rota-destaque"></span>
+                    <span>Rota selecionada</span>
+                </div>
+
+                <div class="item-legenda">
+                    <span class="pino-legenda origem-legenda"></span>
+                    <span>Origem</span>
+                </div>
+
+                <div class="item-legenda">
+                    <span class="pino-legenda destino-legenda"></span>
+                    <span>Destino</span>
+                </div>
+            </div>
 
 
 
@@ -543,147 +505,59 @@
                      RESUMO GLOBAL
                 ================================== -->
 
-                <aside class="resumo-global">
-
-
-                    <h3>
-                        Resumo Global (2024)
-                    </h3>
-
-
-                    <div class="resumo-card roxo">
-
-
-                        <div class="resumo-icone">
-                            👥
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Refugiados no mundo
-                            </span>
-
-
-                            <strong>
-                                42,7 milhões
-                            </strong>
-
-
-                            <small>
-                                Final de 2024
-                            </small>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="resumo-card azul">
-
-
-                        <div class="resumo-icone">
-                            🛂
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Solicitantes de asilo
-                            </span>
-
-
-                            <strong>
-                                8,4 milhões
-                            </strong>
-
-
-                            <small>
-                                Pedidos pendentes
-                            </small>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="resumo-card verde">
-
-
-                        <div class="resumo-icone">
-                            🏠
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Deslocados internos
-                            </span>
-
-
-                            <strong>
-                                73,5 milhões
-                            </strong>
-
-
-                            <small>
-                                Por conflito ou violência
-                            </small>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="resumo-card laranja">
-
-
-                        <div class="resumo-icone">
-                            🌍
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Deslocamento forçado
-                            </span>
-
-
-                            <strong>
-                                123,2 milhões
-                            </strong>
-
-
-                            <small>
-                                Pessoas no mundo
-                            </small>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="fonte-resumo">
-
-                        Fonte:
-                        ACNUR — Global Trends 2024
-
-                    </div>
-
-
-                </aside>
+               
+<!-- RESUMO GLOBAL -->
+<aside class="resumo-global">
+
+    <h3 id="titulo-resumo-global">Resumo Global (2024)</h3>
+
+    <div class="resumo-card roxo">
+        <div class="resumo-icone">👥</div>
+        <div>
+            <span>Refugiados no mundo</span>
+            <strong id="total-refugiados">42,7 milhões</strong>
+            <small id="periodo-refugiados">Final de 2024</small>
+        </div>
+    </div>
+
+    <div class="resumo-card azul">
+        <div class="resumo-icone">🛂</div>
+        <div>
+            <span>Solicitantes de asilo</span>
+            <strong id="total-asilo">8,4 milhões</strong>
+            <small id="periodo-asilo">Pedidos pendentes no final de 2024</small>
+        </div>
+    </div>
+
+    <div class="resumo-card verde">
+        <div class="resumo-icone">🏠</div>
+        <div>
+            <span>Deslocados internos</span>
+            <strong id="total-deslocados">73,5 milhões</strong>
+            <small id="periodo-deslocados">Final de 2024</small>
+        </div>
+    </div>
+
+    <div class="resumo-card laranja">
+        <div class="resumo-icone">🌍</div>
+        <div>
+            <span>Deslocamento forçado</span>
+            <strong id="total-forcados">123,2 milhões</strong>
+            <small id="periodo-forcados">Final de 2024</small>
+        </div>
+    </div>
+
+    <div class="fonte-resumo">
+        Fonte:
+        <a href="https://www.unhcr.org/about-unhcr/overview/figures-glance"
+           target="_blank"
+           rel="noopener noreferrer">
+            ACNUR — Global Trends
+        </a>
+        <span id="periodo-fonte">2024</span>
+    </div>
+
+</aside>
 
 
             </section>
@@ -998,6 +872,7 @@
     src="{{ url_for('static', filename='js/grafico.js') }}"
 ></script>
 
+<script src="{{ url_for('static', filename='js/resumo-global.js') }}"></script>
 
 </body>
 

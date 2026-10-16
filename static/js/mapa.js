@@ -29,6 +29,84 @@ const elementosRotas = [];
 let rotasOriginais = [];
 let modoRotasAtivo = true;
 
+// ========================================
+// CAMADA DE FRONTEIRAS E MUROS
+// ========================================
+
+let modoFronteirasAtivo = false;
+
+const camadaFronteiras = L.layerGroup();
+
+const fronteirasMuros = [
+    {
+        nome: "Barreira entre Polônia e Belarus",
+        paises: "Polônia e Belarus",
+        local: "Fronteira oriental da Polônia",
+        coordenadas: [53.1, 23.5],
+        contexto: "Barreira fronteiriça reforçada pela Polônia em meio à crise migratória na fronteira a partir de 2021.",
+        impacto: "Pode dificultar a travessia e alterar os trajetos de pessoas que buscam entrar na União Europeia."
+    },
+    {
+        nome: "Cerca de Ceuta",
+        paises: "Espanha e Marrocos",
+        local: "Ceuta, norte da África",
+        coordenadas: [35.9, -5.35],
+        contexto: "Sistema de cercas na fronteira terrestre entre o território espanhol de Ceuta e Marrocos.",
+        impacto: "É uma barreira relevante para compreender as tentativas de entrada no território espanhol."
+    },
+    {
+        nome: "Cerca de Melilla",
+        paises: "Espanha e Marrocos",
+        local: "Melilla, norte da África",
+        coordenadas: [35.29, -2.94],
+        contexto: "Sistema de cercas na fronteira terrestre entre o território espanhol de Melilla e Marrocos.",
+        impacto: "A barreira influencia as possibilidades de travessia para o território espanhol."
+    },
+    {
+        nome: "Cerca da fronteira Grécia–Turquia",
+        paises: "Grécia e Turquia",
+        local: "Região de Evros",
+        coordenadas: [41.35, 26.25],
+        contexto: "Trecho da fronteira terrestre onde a Grécia construiu e ampliou barreiras de segurança.",
+        impacto: "As medidas de controle fronteiriço afetam os caminhos usados por pessoas que tentam chegar à Grécia."
+    }, 
+
+    {
+        nome: "Barreira entre Estados Unidos e México",
+        paises: "Estados Unidos e México",
+        local: "Região de San Diego e Tijuana",
+        coordenadas: [32.54, -117.03],
+        contexto: "Barreiras físicas instaladas em diferentes trechos da fronteira entre os dois países para controlar a circulação.",
+        impacto: "Dificultam algumas travessias e podem levar migrantes a buscar caminhos mais perigosos."
+    },
+    {
+        nome: "Cerca entre Índia e Bangladesh",
+        paises: "Índia e Bangladesh",
+        local: "Fronteira entre os dois países",
+        coordenadas: [25.0, 88.0],
+        contexto: "A Índia construiu cercas em extensos trechos da fronteira com Bangladesh.",
+        impacto: "A barreira está relacionada ao controle fronteiriço e à prevenção de travessias irregulares."
+    },
+    {
+        nome: "Barreira entre Turquia e Síria",
+        paises: "Turquia e Síria",
+        local: "Trecho próximo a Kilis",
+        coordenadas: [36.72, 37.12],
+        contexto: "A Turquia construiu uma barreira ao longo de partes da fronteira durante o conflito sírio.",
+        impacto: "Afeta a circulação na fronteira e as possibilidades de deslocamento de pessoas que fogem de conflitos."
+    },
+    {
+        nome: "Cerca entre Hungria e Sérvia",
+        paises: "Hungria e Sérvia",
+        local: "Região de Röszke",
+        coordenadas: [46.18, 19.85],
+        contexto: "A Hungria construiu uma cerca fronteiriça em 2015, durante o aumento das chegadas de refugiados à Europa.",
+        impacto: "Redirecionou trajetos migratórios e tornou mais difícil a travessia irregular nessa fronteira."
+    }
+
+
+];
+
 const cores = {
     1: "#315ee8",
     2: "#f59e0b",
@@ -79,41 +157,35 @@ function criarIconePino(tipo, selecionado = false) {
 // CRIAR CURVA DA ROTA
 // ========================================
 
+
 function criarCurva(origem, destino) {
-    const lat1 = origem[0];
-    const lng1 = origem[1];
-    const lat2 = destino[0];
-    const lng2 = destino[1];
+    const [lat1, lng1] = origem;
+    const [lat2, lng2] = destino;
 
-    const meioLat = (lat1 + lat2) / 2;
-    const meioLng = (lng1 + lng2) / 2;
+    const distancia = Math.hypot(lat2 - lat1, lng2 - lng1);
 
-    const distancia = Math.sqrt(
-        Math.pow(lat2 - lat1, 2) +
-        Math.pow(lng2 - lng1, 2)
-    );
-
-    const intensidade = Math.min(distancia * 0.25, 15);
-
-    const pontoControle = [
-        meioLat + intensidade,
-        meioLng
+    // Direção perpendicular ao trajeto
+    const desvio = Math.min(distancia * 0.18, 12);
+    const controle = [
+        (lat1 + lat2) / 2 + desvio * Math.sign(lng2 - lng1 || 1),
+        (lng1 + lng2) / 2 - desvio * Math.sign(lat2 - lat1 || 1)
     ];
 
     const pontos = [];
 
-    for (let i = 0; i <= 30; i++) {
-        const t = i / 30;
+    for (let i = 0; i <= 60; i++) {
+        const t = i / 60;
+        const inverso = 1 - t;
 
         const lat =
-            Math.pow(1 - t, 2) * lat1 +
-            2 * (1 - t) * t * pontoControle[0] +
-            Math.pow(t, 2) * lat2;
+            inverso * inverso * lat1 +
+            2 * inverso * t * controle[0] +
+            t * t * lat2;
 
         const lng =
-            Math.pow(1 - t, 2) * lng1 +
-            2 * (1 - t) * t * pontoControle[1] +
-            Math.pow(t, 2) * lng2;
+            inverso * inverso * lng1 +
+            2 * inverso * t * controle[1] +
+            t * t * lng2;
 
         pontos.push([lat, lng]);
     }
@@ -121,115 +193,74 @@ function criarCurva(origem, destino) {
     return pontos;
 }
 
+
 // ========================================
 // IDENTIFICAR TIPO
 // ========================================
 function descobrirTipo(rota) {
     const tipo = String(rota.tipo || "").toLowerCase();
 
-    if (tipo.includes("refugi")) {
+    if (tipo.includes("refúgio") || tipo.includes("refugio")) {
         return "refugiados";
     }
 
-    if (tipo.includes("migr")) {
+    if (tipo.includes("migração") || tipo.includes("migracao")) {
         return "migracao";
     }
 
-    const texto = [
-        rota.nome,
-        rota.origem,
-        rota.destino,
-        rota.contexto,
-        rota.causas,
-        rota.dificuldades
-    ].join(" ").toLowerCase();
-
-    const termosRefugio = [
-        "refúgio",
-        "refugio",
-        "refugi",
-        "asilo",
-        "rohingya",
-        "sudão–chade",
-        "sudao-chade"
-    ];
-
-    return termosRefugio.some(termo => texto.includes(termo))
-        ? "refugiados"
-        : "migracao";
+    return "migracao";
 }
 // ========================================
 // IDENTIFICAR REGIÃO
 // ========================================
 
 function descobrirRegiao(rota) {
-    function normalizar(texto) {
-        return String(texto || "")
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    }
+    const texto = [
+        rota.nome,
+        rota.origem,
+        rota.destino
+    ].join(" ").toLowerCase();
 
-    const origem = normalizar(rota.origem);
+    const normalizado = texto.normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 
     if (
-        origem.includes("africa") ||
-        origem.includes("sudao") ||
-        origem.includes("chade") ||
-        origem.includes("etiopia") ||
-        origem.includes("somalia")
+        normalizado.includes("africa") ||
+        normalizado.includes("sudao") ||
+        normalizado.includes("chade") ||
+        normalizado.includes("etiopia") ||
+        normalizado.includes("somalia")
     ) {
         return "africa";
     }
 
     if (
-        origem.includes("america") ||
-        origem.includes("colombia") ||
-        origem.includes("panama") ||
-        origem.includes("mexico")
+        normalizado.includes("america") ||
+        normalizado.includes("colombia") ||
+        normalizado.includes("panama") ||
+        normalizado.includes("mexico")
     ) {
         return "america";
     }
 
     if (
-        origem.includes("asia") ||
-        origem.includes("mianmar") ||
-        origem.includes("bangladesh") ||
-        origem.includes("oriente medio") ||
-        origem.includes("turquia")
+        normalizado.includes("asia") ||
+        normalizado.includes("mianmar") ||
+        normalizado.includes("bangladesh") ||
+        normalizado.includes("malasia") ||
+        normalizado.includes("indonesia") ||
+        normalizado.includes("rohingya")
     ) {
         return "asia";
     }
 
     if (
-        origem.includes("europa") ||
-        origem.includes("grecia") ||
-        origem.includes("bala"
-    )) {
-        return "europa";
-    }
-
-    const texto = normalizar(
-        `${rota.nome} ${rota.origem} ${rota.destino}`
-    );
-
-    if (texto.includes("africa")) return "africa";
-    if (texto.includes("america")) return "america";
-
-    if (
-        texto.includes("asia") ||
-        texto.includes("rohingya") ||
-        texto.includes("mianmar")
-    ) {
-        return "asia";
-    }
-
-    if (
-        texto.includes("europa") ||
-        texto.includes("italia") ||
-        texto.includes("espanha") ||
-        texto.includes("grecia") ||
-        texto.includes("canarias")
+        normalizado.includes("europa") ||
+        normalizado.includes("italia") ||
+        normalizado.includes("espanha") ||
+        normalizado.includes("polonia") ||
+        normalizado.includes("ucrania") ||
+        normalizado.includes("mediterraneo")
     ) {
         return "europa";
     }
@@ -269,17 +300,20 @@ function criarElementoRota(rota) {
     const destino = [latDestino, lngDestino];
     const cor = cores[rota.id] || "#315ee8";
 
+   
     const linha = L.polyline(
         criarCurva(origem, destino),
         {
             color: cor,
             weight: 4,
             opacity: 0.9,
-            dashArray: "10, 7",
+            dashArray: "10 8",
             lineCap: "round",
-            lineJoin: "round"
+            lineJoin: "round",
+            className: "rota-animada"
         }
     );
+
 
     linha.bindTooltip(rota.nome, {
         sticky: true,
@@ -346,6 +380,7 @@ function criarElementoRota(rota) {
 // CARREGAR ROTAS DA API
 // ========================================
 
+
 fetch("/api/rotas")
     .then(response => {
         if (!response.ok) {
@@ -367,21 +402,34 @@ fetch("/api/rotas")
             }
         });
 
-        preencherFiltroRotas(rotas);
         preencherFiltroAno(rotas);
-        mostrarTodasRotas();
+        preencherFiltroRotas(rotas);
 
-        mostrarPainelVazio(
-            "Selecione uma rota",
-            "Clique em uma linha ou pino do mapa para visualizar os detalhes."
-        );
+        const filtroAno = document.getElementById("filtro-ano");
+
+        if (filtroAno) {
+            filtroAno.addEventListener("change", () => {
+                preencherFiltroRotas(rotasOriginais);
+                aplicarFiltros();
+            });
+        }
+
+        ["filtro-tipo", "filtro-regiao", "filtro-rota"].forEach(id => {
+            const filtro = document.getElementById(id);
+
+            if (filtro) {
+                filtro.addEventListener("change", aplicarFiltros);
+            }
+        });
+
+        aplicarFiltros();
     })
     .catch(erro => {
         console.error("ERRO AO CARREGAR ROTAS:", erro);
 
         mostrarPainelVazio(
             "Não foi possível carregar as rotas",
-            "Confira se o Flask está rodando e se a rota /api/rotas está funcionando."
+            "Confira se o Flask está rodando e se /api/rotas está funcionando."
         );
     });
 
@@ -439,27 +487,64 @@ function preencherFiltroAno(rotas) {
 }
 
 // ========================================
-// APLICAR FILTROS
+// PREENCHER FILTRO DE ROTAS
 // ========================================
+
+function preencherFiltroRotas(rotas) {
+    const filtroRota = document.getElementById("filtro-rota");
+    const filtroAno = document.getElementById("filtro-ano");
+
+    if (!filtroRota) return;
+
+    const anoSelecionado = filtroAno ? filtroAno.value : "todos";
+
+    const rotasFiltradas = rotas.filter(rota => {
+        return anoSelecionado === "todos" ||
+               String(rota.ano) === anoSelecionado;
+    });
+
+    filtroRota.innerHTML = '<option value="todas">Todas as rotas</option>';
+
+    rotasFiltradas.forEach(rota => {
+        const opcao = document.createElement("option");
+
+        opcao.value = String(rota.id);
+        opcao.textContent = rota.nome;
+
+        filtroRota.appendChild(opcao);
+    });
+
+    filtroRota.value = "todas";
+}
 
 // ========================================
 // APLICAR FILTROS
 // ========================================
 
 function aplicarFiltros() {
+        if (modoFronteirasAtivo) {
+        return;
+    }
     const tipo =
         document.getElementById("filtro-tipo")?.value || "todas";
 
     const regiao =
         document.getElementById("filtro-regiao")?.value || "todas";
 
-    const rotaSelecionada =
-        document.getElementById("filtro-rota")?.value || "todas";
+    const filtroAno = document.getElementById("filtro-ano");
+    const filtroRota = document.getElementById("filtro-rota");
 
-    const ano =
-        document.getElementById("filtro-ano")?.value || "todos";
+    const ano = filtroAno?.value || "todos";
+    const rotaSelecionada = filtroRota?.value || "todas";
 
     const resultado = rotasOriginais.filter(rota => {
+        if (
+            ano !== "todos" &&
+            String(rota.ano).trim() !== ano
+        ) {
+            return false;
+        }
+
         if (
             tipo !== "todas" &&
             descobrirTipo(rota) !== tipo
@@ -476,14 +561,7 @@ function aplicarFiltros() {
 
         if (
             rotaSelecionada !== "todas" &&
-            String(rota.id) !== String(rotaSelecionada)
-        ) {
-            return false;
-        }
-
-        if (
-            ano !== "todos" &&
-            String(rota.ano) !== ano
+            String(rota.id) !== rotaSelecionada
         ) {
             return false;
         }
@@ -491,34 +569,36 @@ function aplicarFiltros() {
         return true;
     });
 
-    const painel = document.getElementById("painel-rotas-migracao");
-    const botao = document.getElementById("botao-rotas");
+    console.log("ANO APLICADO:", ano);
+    console.log("ROTAS EXIBIDAS:", resultado.length);
 
-    painel?.classList.remove("ativo");
-    botao?.classList.remove("ativo-rotas");
+    document
+        .getElementById("painel-rotas-migracao")
+        ?.classList.remove("ativo");
+
+    document
+        .getElementById("botao-rotas")
+        ?.classList.remove("ativo-rotas");
 
     modoRotasAtivo = true;
 
     atualizarMapa(resultado);
 }
-
 // ========================================
 // ATUALIZAR MAPA
 // ========================================
 
 function atualizarMapa(rotas) {
+    console.log("ATUALIZAR MAPA RECEBEU:", rotas.length, "rotas");
     elementosRotas.forEach(elemento => {
         mapa.removeLayer(elemento.linha);
         mapa.removeLayer(elemento.marcadorOrigem);
         mapa.removeLayer(elemento.marcadorDestino);
+        console.log("REMOVENDO CAMADA:", elemento.rota.nome);
     });
+    
 
     if (rotas.length === 0) {
-        mostrarPainelVazio(
-            "Nenhuma rota encontrada",
-            "Não existem rotas cadastradas para os filtros selecionados."
-        );
-
         mapa.setView([20, 0], 2);
         return;
     }
@@ -578,14 +658,19 @@ function mostrarTodasRotas() {
 // DESTACAR ROTA
 // ========================================
 
+
+
 function destacarRota(id) {
     elementosRotas.forEach(elemento => {
         const selecionado =
             String(elemento.rota.id) === String(id);
 
         elemento.linha.setStyle({
+            color: selecionado
+                ? "#08c9e8"
+                : (cores[elemento.rota.id] || "#315ee8"),
             weight: selecionado ? 7 : 3,
-            opacity: selecionado ? 1 : 0.2
+            opacity: selecionado ? 1 : 0.22
         });
 
         elemento.marcadorOrigem.setIcon(
@@ -596,19 +681,29 @@ function destacarRota(id) {
             criarIconePino("destino", selecionado)
         );
 
-        elemento.marcadorOrigem.setZIndexOffset(selecionado ? 1000 : 0);
-        elemento.marcadorDestino.setZIndexOffset(selecionado ? 1000 : 0);
+        elemento.marcadorOrigem.setZIndexOffset(
+            selecionado ? 1000 : 0
+        );
+
+        elemento.marcadorDestino.setZIndexOffset(
+            selecionado ? 1000 : 0
+        );
     });
 }
+
 
 // ========================================
 // MOSTRAR INFORMAÇÕES DA ROTA
 // ========================================
 
+
 function mostrarInformacoes(rota) {
     const painel = document.getElementById("painel-rota");
 
     if (!painel) return;
+
+    const fonte = rota.fonte || "";
+    const fonteSegura = /^https?:\/\/\S+$/i.test(fonte);
 
     painel.innerHTML = `
         <div class="painel-topo">
@@ -632,18 +727,26 @@ function mostrarInformacoes(rota) {
 
         <div class="informacoes-grid">
             <div class="card-info">
-                <div class="icone-info">📖</div>
+                <div class="icone-info">📅</div>
                 <div>
-                    <span>CONTEXTO</span>
-                    <p>${rota.contexto || "Informação não cadastrada."}</p>
+                    <span>ANO DOS DADOS</span>
+                    <p>${rota.ano || "Não informado"}</p>
                 </div>
             </div>
 
             <div class="card-info">
-                <div class="icone-info">⚠️</div>
+                <div class="icone-info">🏷️</div>
                 <div>
-                    <span>FATORES RELACIONADOS</span>
-                    <p>${rota.causas || "Informação não cadastrada."}</p>
+                    <span>TIPO</span>
+                    <p>${rota.tipo || "Não informado"}</p>
+                </div>
+            </div>
+
+            <div class="card-info">
+                <div class="icone-info">📖</div>
+                <div>
+                    <span>CONTEXTO</span>
+                    <p>${rota.contexto || "Informação não cadastrada."}</p>
                 </div>
             </div>
 
@@ -656,10 +759,24 @@ function mostrarInformacoes(rota) {
             </div>
 
             <div class="card-info">
+                <div class="icone-info">🗓️</div>
+                <div>
+                    <span>PERÍODO DE REFERÊNCIA</span>
+                    <p>${rota.periodo_dados || "Período não informado."}</p>
+                </div>
+            </div>
+
+            <div class="card-info">
                 <div class="icone-info">📚</div>
                 <div>
                     <span>FONTE</span>
-                    <p>${rota.fonte || "Fonte não cadastrada."}</p>
+                    ${
+                        
+                        fonteSegura
+                        ? `<a href="${fonte}" target="_blank" rel="noopener noreferrer" title="Consultar fonte original">${/unhcr\.org|data\.unhcr\.org/i.test(fonte) ? "ACNUR" : /iom\.int/i.test(fonte) ? "OIM" : "Fonte original"} ↗</a>`
+                        : "<p>Fonte não cadastrada.</p>"
+}
+                    
                 </div>
             </div>
         </div>
@@ -670,6 +787,7 @@ function mostrarInformacoes(rota) {
         block: "nearest"
     });
 }
+
 
 // ========================================
 // PAINEL VAZIO
@@ -693,23 +811,37 @@ function mostrarPainelVazio(titulo, texto) {
 // ALTERNAR PAINEL DE ROTAS
 // ========================================
 
+
 function alternarRotasMigracao() {
-    const painel = document.getElementById("painel-rotas-migracao");
     const botao = document.getElementById("botao-rotas");
 
-    if (!painel) {
-        console.error("Painel de rotas não encontrado.");
+    // Se estiver no modo de fronteiras, não alternar as rotas.
+    if (modoFronteirasAtivo) {
         return;
     }
 
-    const abrir = !painel.classList.contains("ativo");
+    // Se as rotas estiverem visíveis, escondê-las.
+    if (modoRotasAtivo) {
+        esconderTodasRotas();
+        modoRotasAtivo = false;
 
-    painel.classList.toggle("ativo", abrir);
-    botao?.classList.toggle("ativo-rotas", abrir);
+        botao?.classList.remove("ativo-rotas");
+        botao?.setAttribute("aria-pressed", "false");
 
-    if (abrir) {
-        criarPainelRotas();
+        mostrarPainelVazio(
+            "Rotas ocultas",
+            "Clique em Rotas de Migração novamente para exibir as rotas."
+        );
+
+        return;
     }
+
+    // Se estiverem ocultas, aplicar os filtros e exibi-las.
+    modoRotasAtivo = true;
+    aplicarFiltros();
+
+    botao?.classList.add("ativo-rotas");
+    botao?.setAttribute("aria-pressed", "true");
 }
 
 // ========================================
@@ -814,5 +946,92 @@ function selecionarRotaPainel(rota) {
 
     mapa.fitBounds(elemento.linha.getBounds(), {
         padding: [80, 80]
+    });
+}
+document.getElementById("filtro-ano")?.addEventListener("change", function () {
+    console.log("ANO SELECIONADO:", this.value);
+
+    const rotasDoAno = rotasOriginais.filter(
+        rota => String(rota.ano).trim() === this.value
+    );
+
+    console.log("ROTAS DESSE ANO:", rotasDoAno);
+    console.log("TOTAL DEPOIS DO FILTRO:", rotasDoAno.length);
+});
+
+// ========================================
+// ALTERNAR FRONTEIRAS E MUROS
+// ========================================
+
+function alternarFronteirasMuros() {
+    const botao = document.getElementById("botao-fronteiras");
+
+    if (modoFronteirasAtivo) {
+        // Voltar para as rotas
+        mapa.removeLayer(camadaFronteiras);
+
+        modoFronteirasAtivo = false;
+
+        if (botao) {
+            botao.classList.remove("ativo");
+            botao.setAttribute("aria-pressed", "false");
+        }
+
+        aplicarFiltros();
+        return;
+    }
+
+    // Esconder as rotas temporariamente
+    esconderTodasRotas();
+
+    mostrarPainelVazio(
+        "Fronteiras e Muros",
+        "Clique em um marcador para conhecer a barreira e seu contexto migratório."
+    );
+
+
+    // Criar os marcadores informativos
+    fronteirasMuros.forEach(fronteira => {
+        const marcador = L.circleMarker(fronteira.coordenadas, {
+            radius: 9,
+            color: "#ffffff",
+            weight: 2,
+            fillColor: "#d97706",
+            fillOpacity: 1
+        });
+
+        marcador.bindPopup(`
+            <div class="popup-rota">
+                <strong>${fronteira.nome}</strong>
+                <br><br>
+                <b>Países:</b> ${fronteira.paises}
+                <br>
+                <b>Local:</b> ${fronteira.local}
+                <br><br>
+                <b>Contexto:</b> ${fronteira.contexto}
+                <br><br>
+                <b>Impacto migratório:</b> ${fronteira.impacto}
+            </div>
+        `);
+
+        marcador.addTo(camadaFronteiras);
+    });
+
+    camadaFronteiras.addTo(mapa);
+
+    modoFronteirasAtivo = true;
+
+    if (botao) {
+        botao.classList.add("ativo");
+        botao.setAttribute("aria-pressed", "true");
+    }
+
+    const limites = L.latLngBounds(
+        fronteirasMuros.map(fronteira => fronteira.coordenadas)
+    );
+
+    mapa.fitBounds(limites, {
+        padding: [40, 40],
+        maxZoom: 5
     });
 }

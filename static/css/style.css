@@ -1088,3 +1088,26 @@ css
     display: inline-block;
     margin-top: 12px;
 }
+
+
+/* Corrige o botão Fronteiras e Muros */
+#botao-fronteiras.sidebar-item {
+    appearance: none;
+    -webkit-appearance: none;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Mantém a aparência consistente ao passar o mouse */
+#botao-fronteiras.sidebar-item:hover {
+    font: inherit;
+}
+
+/* Mantém o destaque com o mesmo espaço interno */
+#botao-fronteiras.sidebar-item:focus-visible {
+    outline: 2px solid var(--destaque);
+    outline-offset: 2px;
+}
